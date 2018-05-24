@@ -1,0 +1,34 @@
+Ext.define("myApp.model.TempControl", {
+    extend: "Ext.data.Model",
+    fields: [{
+        name: 'id',
+        type: 'int'
+    }, {
+        name: 'deviceid',
+        type: 'int'
+    }, {
+        name: 'devicename',
+        type: 'string'
+    }, {
+        name: 'auto',
+        type: 'int'
+    }, {
+        name: 'modestr',
+        type: 'string'
+    }, {
+        name: 'tempset',
+        type: 'int'
+    }, {
+        name: 'humidset',
+        type: 'int'
+    }, {
+        name: 'mist',
+        type: 'int'
+    }, {
+        name: 'fanspeed',
+        type: 'int'
+    }, {
+        name: 'sensor',
+        type: 'string'
+    }]
+});

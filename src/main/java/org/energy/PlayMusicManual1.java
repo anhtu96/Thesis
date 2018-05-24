@@ -1,0 +1,71 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package org.energy;
+
+import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import static org.energy.PlayMusicAuto1.clip;
+import static org.energy.PlayMusicAuto1.currentSong;
+
+/**
+ *
+ * @author songo
+ */
+public class PlayMusicManual1 implements Runnable {
+
+    public static Clip clip;
+    public static String currentSong = "";
+    private MysqlConfig mysql = new MysqlConfig();
+
+    @Override
+    public void run() {
+        try {
+            Connection conn = mysql.getConn();
+            Statement st = conn.createStatement();
+            ResultSet rs = null;
+            String path = "web/audio/converted/";
+
+            clip = AudioSystem.getClip(AudioSystem.getMixerInfo()[0]);
+            while (true) {
+                rs = st.executeQuery("SELECT * FROM musicmanual1");
+                if (!rs.isBeforeFirst()) {
+                    currentSong = "";
+                    if (clip.isOpen()) {
+                        clip.close();
+                    }
+                } else {
+                    while (rs.next()) {
+                        if (!currentSong.equals(rs.getString("name"))) {
+                            currentSong = rs.getString("name");
+                            if (clip.isOpen()) {
+                                clip.close();
+                            }
+                            clip.open(AudioSystem.getAudioInputStream(new File(path + currentSong + ".wav")));
+                            clip.start();
+                            clip.loop(clip.LOOP_CONTINUOUSLY);
+                        }
+
+                    }
+                    rs.close();
+                }
+
+                Thread.sleep(500);
+            }
+        } catch (Exception ex) {
+        }
+    }
+}

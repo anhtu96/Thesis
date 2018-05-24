@@ -1,0 +1,16 @@
+﻿{
+    "success": true,
+    "users": [{
+        "Name": "Mahesh",
+        "City": "Phili",
+        "Points": 7500
+    }, {
+        "Name": "DJ",
+        "City": "Delhi",
+        "Points": 5500
+    }, {
+        "Name": "Shiv",
+        "City": "Mumbai",
+        "Points": 3200
+    }]
+}

@@ -1,0 +1,78 @@
+.home-icon {
+    background-image: url("../svg/home.svg");
+}
+.temperature-icon {
+    background-image: url("../svg/thermometer-half.svg");
+}
+.light-icon {
+    background-image: url("../svg/lightbulb.svg");
+}
+.setting {
+    background-image: url("../svg/setting.svg");
+}
+.diagram {
+    background-image: url("../svg/diagram.svg");
+}
+.music-icon {
+    background-image: url("../svg/music.svg");
+}
+.stat-icon {
+	background-image: url("../svg/file-alt.svg");
+}
+.trash-icon {
+	background-image: url("../svg/trash-alt.svg");
+}
+.edit-icon {
+	background-image: url("../svg/ellipsis-v.svg");
+}
+.fan_onl {
+    background-image:url("../img/fan_onl.png");
+}
+.fan_off {
+    background-image:url("../img/fan_off.png");
+}
+.tempsensor_onl {
+    background-image: url("../img/tempsensor_onl.png");
+}
+.tempsensor_off {
+    background-image: url("../img/tempsensor_off.png");
+}
+.light_onl {
+    background-image: url("../img/light_onl.png");
+}
+.light_off {
+    background-image: url("../img/light_off.png");
+}
+#spinner {
+	position: absolute;
+   top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+     border-left: 6px solid rgba(56, 146, 212, .15);
+    border-right: 6px solid rgba(56, 146, 212, .15);
+    border-bottom: 6px solid rgba(56, 146, 212, .15);
+    border-top: 6px solid rgba(56, 146, 212, .8);
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+#wait {
+	text-align:center;
+	font-size:13px;
+	position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: 50px;
+}
