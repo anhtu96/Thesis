@@ -163,7 +163,7 @@ public class LightControl implements Runnable {
 
             }
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
             } catch (InterruptedException ex) {
                 Logger.getLogger(LightControl.class.getName()).log(Level.SEVERE, null, ex);
             }
