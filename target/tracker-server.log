@@ -1,42 +1,7 @@
-2018-05-23 17:42:08  INFO: Operating system name: Linux version: 4.4.50-v7+ architecture: arm
-2018-05-23 17:42:08  INFO: Java runtime name: Java HotSpot(TM) Client VM vendor: Oracle Corporation version: 25.65-b01
-2018-05-23 17:42:08  INFO: Memory limit heap: 224mb non-heap: 0mb
-2018-05-23 17:42:08  INFO: Character encoding: UTF-8 charset: UTF-8
-2018-05-23 17:42:08  INFO: Version: null
-2018-05-23 17:42:09  INFO: Starting server...
-2018-05-23 17:43:33  INFO: Shutting down server...
-2018-05-23 17:45:05  INFO: Operating system name: Linux version: 4.4.50-v7+ architecture: arm
-2018-05-23 17:45:05  INFO: Java runtime name: Java HotSpot(TM) Client VM vendor: Oracle Corporation version: 25.65-b01
-2018-05-23 17:45:05  INFO: Memory limit heap: 224mb non-heap: 0mb
-2018-05-23 17:45:05  INFO: Character encoding: UTF-8 charset: UTF-8
-2018-05-23 17:45:05  INFO: Version: null
-2018-05-23 17:45:06  INFO: Starting server...
-2018-05-23 17:45:24  INFO: Shutting down server...
-2018-05-23 17:46:11  INFO: Operating system name: Linux version: 4.4.50-v7+ architecture: arm
-2018-05-23 17:46:11  INFO: Java runtime name: Java HotSpot(TM) Client VM vendor: Oracle Corporation version: 25.65-b01
-2018-05-23 17:46:11  INFO: Memory limit heap: 224mb non-heap: 0mb
-2018-05-23 17:46:11  INFO: Character encoding: UTF-8 charset: UTF-8
-2018-05-23 17:46:11  INFO: Version: null
-2018-05-23 17:46:13  INFO: Starting server...
-2018-05-23 17:46:40  INFO: Shutting down server...
-2018-05-23 17:48:49  INFO: Operating system name: Linux version: 4.4.50-v7+ architecture: arm
-2018-05-23 17:48:49  INFO: Java runtime name: Java HotSpot(TM) Client VM vendor: Oracle Corporation version: 25.65-b01
-2018-05-23 17:48:49  INFO: Memory limit heap: 224mb non-heap: 0mb
-2018-05-23 17:48:49  INFO: Character encoding: UTF-8 charset: UTF-8
-2018-05-23 17:48:49  INFO: Version: null
-2018-05-23 17:48:51  INFO: Starting server...
-2018-05-23 17:51:14  INFO: Shutting down server...
-2018-05-23 17:51:47  INFO: Operating system name: Linux version: 4.4.50-v7+ architecture: arm
-2018-05-23 17:51:47  INFO: Java runtime name: Java HotSpot(TM) Client VM vendor: Oracle Corporation version: 25.65-b01
-2018-05-23 17:51:47  INFO: Memory limit heap: 224mb non-heap: 0mb
-2018-05-23 17:51:47  INFO: Character encoding: UTF-8 charset: UTF-8
-2018-05-23 17:51:47  INFO: Version: null
-2018-05-23 17:51:49  INFO: Starting server...
-2018-05-23 17:59:07  INFO: Shutting down server...
-2018-05-23 18:31:36  INFO: Operating system name: Linux version: 4.4.50-v7+ architecture: arm
-2018-05-23 18:31:36  INFO: Java runtime name: Java HotSpot(TM) Client VM vendor: Oracle Corporation version: 25.65-b01
-2018-05-23 18:31:36  INFO: Memory limit heap: 224mb non-heap: 0mb
-2018-05-23 18:31:36  INFO: Character encoding: UTF-8 charset: UTF-8
-2018-05-23 18:31:36  INFO: Version: null
-2018-05-23 18:31:37  INFO: Starting server...
-2018-05-23 18:36:39  INFO: Shutting down server...
+2018-05-24 19:03:46  INFO: Operating system name: Linux version: 4.4.50-v7+ architecture: arm
+2018-05-24 19:03:46  INFO: Java runtime name: Java HotSpot(TM) Client VM vendor: Oracle Corporation version: 25.65-b01
+2018-05-24 19:03:46  INFO: Memory limit heap: 224mb non-heap: 0mb
+2018-05-24 19:03:46  INFO: Character encoding: UTF-8 charset: UTF-8
+2018-05-24 19:03:46  INFO: Version: null
+2018-05-24 19:03:48  INFO: Starting server...
+2018-05-24 19:04:06  INFO: Shutting down server...
