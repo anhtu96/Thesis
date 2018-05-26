@@ -75,7 +75,7 @@ Ext.application({
                 });
                 if (Ext.getCmp('flame-' + array[0].deviceid)) {
                     var btn = Ext.getCmp('flame-' + array[0].deviceid);
-                    btn.setIconCls((record.get('state') == 'online') ? 'flame_onl' : 'flame_off');
+                    btn.setIconCls((record.get('onlinestatus') == 'online') ? 'flame_onl' : 'flame_off');
                     btn.setStyle({
                         'background': (record.get('onlinestatus') == 'online') ? '#FF7575' : '#434343',
                         'color': (record.get('onlinestatus') == 'online') ? '#8C0000' : '#FF7575',
