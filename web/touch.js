@@ -75,23 +75,11 @@ Ext.application({
                 });
                 if (Ext.getCmp('flame-' + array[0].deviceid)) {
                     var btn = Ext.getCmp('flame-' + array[0].deviceid);
-                    btn.setIconCls((record.get('onlinestatus') == 'online') ? 'flame_onl' : 'flame_off');
+                    btn.setIconCls((record.get('onlinestatus') == 'online') ? (array[0].state == 0 ? 'flame_danger' : 'flame_onl') : 'flame_off');
                     btn.setStyle({
                         'background': (record.get('onlinestatus') == 'online') ? '#FF7575' : '#434343',
                         'color': (record.get('onlinestatus') == 'online') ? '#8C0000' : '#FF7575',
                     });
-                    if (array[0].state == 0) {
-                        console.log(Ext.getCmp('task'));
-                        var someFunction = function() {
-                            var task = new Ext.util.DelayedTask(function(task) {
-                                console.log('a');
-                                someFunction.call(task)
-                            });
-                            task.setId('task');
-                            task.delay(1000);
-                        };
-                        someFunction();
-                    }
                 }
                 if (array[0].state == 0) {
                     Ext.getCmp('fireaudio').play();
