@@ -15,6 +15,7 @@ Ext.define('myApp.controller.mRoot', {
         var audio = Ext.create('Ext.Audio', {
             url: 'audio/alarm/fire.mp3',
             id: 'fireaudio',
+            loop: true
         });
         Ext.Viewport.add([{
             // xtype: 'tabpanel',
