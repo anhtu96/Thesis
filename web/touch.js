@@ -81,23 +81,15 @@ Ext.application({
                         'color': (record.get('onlinestatus') == 'online') ? '#8C0000' : '#FF7575',
                     });
                     if (array[0].state == 0) {
-                        console.log(Ext.getCmp('task-' + array[0].deviceid));
-                        if (!Ext.getCmp('task-' + array[0].deviceid)) {
-                            var runner = new Ext.util.TaskRunner(),
-                                task1;
-                            var task2 = new Ext.util.DelayedTask(function() {
-                                console.log('b');
-                            });
-                            task1 = runner.newTask({
-                                run: function() {
-                                    console.log('a');
-                                    task2.delay(1000);
-                                },
-                                interval: 2000,
-                                id: 'task-' + array[0].deviceid
-                            });
-                            task1.start();
-                        }
+                        var someFunction = function() {
+                            var task = Ext.create('Ext.util.DelayedTask', function() {
+                                console.log('hi');
+                                someFunction.call(this);
+                            }, this);
+
+                            task.delay(500);
+                        };
+                        someFunction();
                     }
                 }
                 if (array[0].state == 0) {
