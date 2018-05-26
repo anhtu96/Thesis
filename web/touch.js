@@ -80,6 +80,13 @@ Ext.application({
                         'background': (record.get('onlinestatus') == 'online') ? '#FF7575' : '#434343',
                         'color': (record.get('onlinestatus') == 'online') ? '#8C0000' : '#FF7575',
                     });
+                    if (array[0].state == 0) {
+                        var runner = new Ext.util.TaskRunner(function() {
+                                alert();
+                            },
+                            interval: 1000);
+                        runner.start();
+                    }
                 }
                 if (array[0].state == 0) {
                     Ext.getCmp('fireaudio').play();
