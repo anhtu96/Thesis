@@ -91,7 +91,8 @@ Ext.application({
                                 console.log('a');
                                 task2.delay(1000);
                             },
-                            interval: 2000
+                            interval: 2000,
+                            id: 'task-' + array[0].deviceid
                         });
                         task1.start();
                     }
