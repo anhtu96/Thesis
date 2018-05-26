@@ -91,7 +91,7 @@ Ext.application({
                                 });
                                 task2.delay(1000);
                             },
-                            interval: 1000
+                            interval: 2000
                         });
                         task1.start();
                     }
