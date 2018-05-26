@@ -219,7 +219,7 @@ Ext.define('myApp.controller.HomeController', {
                         id: 'flame-' + record.get('deviceid'),
                         deviceid: record.get('deviceid'),
                         floor: record.get('floor'),
-                        iconCls: (record.get('onlinestatus') == 'online') ? 'flame_onl' : 'flame_off',
+                        iconCls: (record.get('onlinestatus') == 'online') ? (record.get('state') == 0 ? 'flame_danger' : 'flame_onl') : 'flame_off',
                         height: 32,
                         style: {
                             'background': (record.get('onlinestatus') == 'online') ? '#FF7575' : '#434343',
@@ -409,7 +409,7 @@ Ext.define('myApp.controller.HomeController', {
                                 id: 'flame-' + record.get('deviceid'),
                                 deviceid: record.get('deviceid'),
                                 floor: record.get('floor'),
-                                iconCls: (record.get('onlinestatus') == 'online') ? 'flame_onl' : 'flame_off',
+                                iconCls: (record.get('onlinestatus') == 'online') ? (record.get('state') == 0 ? 'flame_danger' : 'flame_onl') : 'flame_off',
                                 height: 32,
                                 style: {
                                     'background': (record.get('onlinestatus') == 'online') ? '#FF7575' : '#434343',
