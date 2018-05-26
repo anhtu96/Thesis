@@ -84,10 +84,10 @@ Ext.application({
                         console.log(Ext.getCmp('task'));
                         var someFunction = function() {
                             var task = new Ext.util.DelayedTask(function(task) {
-                                    console.log('a');
-                                    someFunction.call(task)
-                                },
-                                id: 'task');
+                                console.log('a');
+                                someFunction.call(task)
+                            });
+                            task.setId('task');
                             task.delay(1000);
                         };
                         someFunction();
