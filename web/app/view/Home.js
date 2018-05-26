@@ -272,7 +272,7 @@ Ext.define('myApp.view.Home', {
                     style: 'margin-top:10px',
                     items: [{
                         xtype: 'titlebar',
-                        title: '<font color=white>Legends (background colors)</font>',
+                        title: '<font color=white>Legends</font>',
                     }],
                     html: '<br><img src = "resources/img/tempsensor.png" style="width:20px"> Temperature sensors' +
                         '<br><img src = "resources/img/tempcontrol.png" style="width:20px"> Temperature controlling devices' +
