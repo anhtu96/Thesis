@@ -60,6 +60,7 @@ Ext.define('myApp.controller.HomeController', {
             storeTempControl = Ext.getStore('TempControlHome'),
             storeLight = Ext.getStore('LightbulbHome'),
             storeFloor = Ext.getStore('Floor'),
+            storeFlame = Ext.getStore('FlameHome'),
             record = storeFloor.getAt(0),
             floor1 = Ext.getCmp('floor1'),
             floor2 = Ext.getCmp('floor2');
@@ -120,7 +121,7 @@ Ext.define('myApp.controller.HomeController', {
                             tip.showBy(button);
                         }
                     });
-                    btn.el.setY(130 * (floorNum - i) - 32 * (devCnt - devCntTmp));
+                    btn.el.setY(150 * (floorNum - i) - 32 * (devCnt - devCntTmp));
                     devCnt++;
                     devCntTmp++;
                     floor1.add(btn)
@@ -171,7 +172,7 @@ Ext.define('myApp.controller.HomeController', {
                             tip.showBy(button);
                         }
                     });
-                    btn.el.setY(130 * (floorNum - i) - 32 * (devCnt - devCntTmp));
+                    btn.el.setY(150 * (floorNum - i) - 32 * (devCnt - devCntTmp));
                     devCnt++;
                     devCntTmp++;
                     floor1.add(btn);
@@ -206,7 +207,42 @@ Ext.define('myApp.controller.HomeController', {
                             tip.showBy(button);
                         }
                     });
-                    btn.el.setY(130 * (floorNum - i) - 32 * (devCnt - devCntTmp));
+                    btn.el.setY(150 * (floorNum - i) - 32 * (devCnt - devCntTmp));
+                    devCnt++;
+                    devCntTmp++;
+                    floor1.add(btn);
+                }
+            });
+            storeFlame.each(function(record) {
+                if (record.get('floor') == i) {
+                    var btn = Ext.create('Ext.Button', {
+                        id: 'flame-' + record.get('deviceid'),
+                        deviceid: record.get('deviceid'),
+                        floor: record.get('floor'),
+                        iconCls: (record.get('onlinestatus') == 'online') ? 'flame_onl' : 'flame_off',
+                        height: 32,
+                        style: {
+                            'background': (record.get('onlinestatus') == 'online') ? '#FF7575' : '#434343',
+                            'color': (record.get('onlinestatus') == 'online') ? '#8C0000' : '#FF7575',
+                        },
+                        text: '<b>' + record.get('devicename') + '</b>',
+                        handler: function(button) {
+                            var store = Ext.getStore('LightbulbHome');
+                            store.filter('deviceid', button.deviceid);
+                            if (Ext.getCmp('tip')) {
+                                Ext.getCmp('tip').destroy();
+                            }
+                            var tip = new Ext.tip.ToolTip({
+                                id: 'tip',
+                                html: '<b><font size = 3>' + button.getText() + '</font></b>' +
+                                    '<br><b>Status: </b>' + store.getAt(0).get('onlinestatus') +
+                                    '<br><b>Floor: </b>' + button.floor
+                            });
+                            store.clearFilter();
+                            tip.showBy(button);
+                        }
+                    });
+                    btn.el.setY(150 * (floorNum - i) - 32 * (devCnt - devCntTmp));
                     devCnt++;
                     devCntTmp++;
                     floor1.add(btn);
@@ -215,7 +251,7 @@ Ext.define('myApp.controller.HomeController', {
             });
             var img = Ext.create('Ext.Img', {
                 src: 'resources/img/birdhouse.PNG',
-                height: 130,
+                height: 150,
                 width: 500
             });
             floor2.add(img);
@@ -230,6 +266,7 @@ Ext.define('myApp.controller.HomeController', {
                     storeTempSensor = Ext.getStore('TempSensorHome'),
                     storeTempControl = Ext.getStore('TempControlHome'),
                     storeLight = Ext.getStore('LightbulbHome'),
+                    storeFlame = Ext.getStore('FlameHome'),
                     floorNum = Ext.getStore('Floor').getAt(0).get('num'),
                     floor1 = Ext.getCmp('floor1'),
                     floor2 = Ext.getCmp('floor2');
@@ -274,7 +311,7 @@ Ext.define('myApp.controller.HomeController', {
                                     tip.showBy(button);
                                 }
                             });
-                            btn.el.setY(130 * (floorNum - i) - 32 * (devCnt - devCntTmp));
+                            btn.el.setY(150 * (floorNum - i) - 32 * (devCnt - devCntTmp));
                             devCnt++;
                             devCntTmp++;
                             floor1.add(btn)
@@ -325,7 +362,7 @@ Ext.define('myApp.controller.HomeController', {
                                     tip.showBy(button);
                                 }
                             });
-                            btn.el.setY(130 * (floorNum - i) - 32 * (devCnt - devCntTmp));
+                            btn.el.setY(150 * (floorNum - i) - 32 * (devCnt - devCntTmp));
                             devCnt++;
                             devCntTmp++;
                             floor1.add(btn);
@@ -360,7 +397,42 @@ Ext.define('myApp.controller.HomeController', {
                                     tip.showBy(button);
                                 }
                             });
-                            btn.el.setY(130 * (floorNum - i) - 32 * (devCnt - devCntTmp));
+                            btn.el.setY(150 * (floorNum - i) - 32 * (devCnt - devCntTmp));
+                            devCnt++;
+                            devCntTmp++;
+                            floor1.add(btn);
+                        }
+                    });
+                    storeFlame.each(function(record) {
+                        if (record.get('floor') == i) {
+                            var btn = Ext.create('Ext.Button', {
+                                id: 'flame-' + record.get('deviceid'),
+                                deviceid: record.get('deviceid'),
+                                floor: record.get('floor'),
+                                iconCls: (record.get('onlinestatus') == 'online') ? 'flame_onl' : 'flame_off',
+                                height: 32,
+                                style: {
+                                    'background': (record.get('onlinestatus') == 'online') ? '#FF7575' : '#434343',
+                                    'color': (record.get('onlinestatus') == 'online') ? '#8C0000' : '#FF7575'
+                                },
+                                text: '<b>' + record.get('devicename') + '</b>',
+                                handler: function(button) {
+                                    var store = Ext.getStore('LightbulbHome');
+                                    store.filter('deviceid', button.deviceid);
+                                    if (Ext.getCmp('tip')) {
+                                        Ext.getCmp('tip').destroy();
+                                    }
+                                    var tip = new Ext.tip.ToolTip({
+                                        id: 'tip',
+                                        html: '<b><font size = 3>' + button.getText() + '</font></b>' +
+                                            '<br><b>Status: </b>' + store.getAt(0).get('onlinestatus') +
+                                            '<br><b>Floor: </b>' + button.floor
+                                    });
+                                    store.clearFilter();
+                                    tip.showBy(button);
+                                }
+                            });
+                            btn.el.setY(150 * (floorNum - i) - 32 * (devCnt - devCntTmp));
                             devCnt++;
                             devCntTmp++;
                             floor1.add(btn);
@@ -369,7 +441,7 @@ Ext.define('myApp.controller.HomeController', {
                     });
                     var img = Ext.create('Ext.Img', {
                         src: 'resources/img/birdhouse.PNG',
-                        height: 130,
+                        height: 150,
                         width: 500
                     });
                     floor2.add(img);
