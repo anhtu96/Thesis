@@ -83,12 +83,12 @@ Ext.application({
                     if (array[0].state == 0) {
                         var runner = new Ext.util.TaskRunner(),
                             task1;
+                        var task2 = new Ext.util.DelayedTask(function() {
+                            console.log('b');
+                        });
                         task1 = runner.newTask({
                             run: function() {
                                 console.log('a');
-                                var task2 = new Ext.util.DelayedTask(function() {
-                                    console.log('b');
-                                });
                                 task2.delay(1000);
                             },
                             interval: 2000
