@@ -82,14 +82,22 @@ Ext.application({
                     });
                     if (array[0].state == 0) {
                         var runner = new Ext.util.TaskRunner(),
-                            task;
-                        task = runner.newTask({
+                            task1,
+                            task2;
+                        task2 = runner.newTask({
                             run: function() {
-                                console.log('a');
+                                console.log('b');
                             },
                             interval: 1000
                         });
-                        task.start();
+                        task1 = runner.newTask({
+                            run: function() {
+                                console.log('a');
+                                task2.start();
+                            },
+                            interval: 1000
+                        });
+                        task1.start();
                     }
                 }
                 if (array[0].state == 0) {
