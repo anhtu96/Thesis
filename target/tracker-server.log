@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2018-05-26 08:58:25  INFO: Operating system name: Windows 10 version: 10.0 architecture: amd64
 2018-05-26 08:58:25  INFO: Java runtime name: Java HotSpot(TM) 64-Bit Server VM vendor: Oracle Corporation version: 25.162-b12
 2018-05-26 08:58:25  INFO: Memory limit heap: 1810mb non-heap: 0mb
@@ -10,3 +11,12 @@
 2018-05-26 09:21:42  INFO: Character encoding: Cp1252 charset: windows-1252
 2018-05-26 09:21:42  INFO: Version: null
 2018-05-26 09:21:43  INFO: Starting server...
+=======
+2018-05-26 08:38:56  INFO: Operating system name: Linux version: 4.4.50-v7+ architecture: arm
+2018-05-26 08:38:56  INFO: Java runtime name: Java HotSpot(TM) Client VM vendor: Oracle Corporation version: 25.65-b01
+2018-05-26 08:38:56  INFO: Memory limit heap: 224mb non-heap: 0mb
+2018-05-26 08:38:56  INFO: Character encoding: UTF-8 charset: UTF-8
+2018-05-26 08:38:56  INFO: Version: null
+2018-05-26 08:38:58  INFO: Starting server...
+2018-05-26 08:41:43  INFO: Shutting down server...
+>>>>>>> 808255adfc2eea330dd87e0a45622cfe54ebe8b8
