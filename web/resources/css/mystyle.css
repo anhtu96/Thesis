@@ -43,6 +43,12 @@
 .light_off {
     background-image: url("../img/light_off.png");
 }
+.flame_off {
+    background-image:url("../img/flame_off.png");
+}
+.flame_on {
+    background-image:url("../img/flame_on.png");
+}
 #spinner {
 	position: absolute;
    top:0;
