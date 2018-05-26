@@ -83,18 +83,20 @@ Ext.application({
                     if (array[0].state == 0) {
                         var runner = new Ext.util.TaskRunner(),
                             task1;
-                        var task2 = new Ext.util.DelayedTask(function() {
-                            console.log('b');
-                        });
-                        task1 = runner.newTask({
-                            run: function() {
-                                console.log('a');
-                                task2.delay(1000);
-                            },
-                            interval: 2000,
-                            id: 'task-' + array[0].deviceid
-                        });
-                        task1.start();
+                        if (Ext.getCmp('task-' + array[0].deviceid)) {
+                            var task2 = new Ext.util.DelayedTask(function() {
+                                console.log('b');
+                            });
+                            task1 = runner.newTask({
+                                run: function() {
+                                    console.log('a');
+                                    task2.delay(1000);
+                                },
+                                interval: 2000,
+                                id: 'task-' + array[0].deviceid
+                            });
+                            task1.start();
+                        }
                     }
                 }
                 if (array[0].state == 0) {
