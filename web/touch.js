@@ -83,11 +83,11 @@ Ext.application({
                     if (array[0].state == 0) {
                         console.log(Ext.getCmp('task'));
                         var someFunction = function() {
-                            var task = Ext.create('Ext.util.DelayedTask', id: 'task', function() {
-                                console.log('hi');
-                                someFunction.call(this);
-                            }, this);
-                            task.delay(500);
+                            var task = new Ext.util.DelayedTask(function(task) {
+                                console.log('a');
+                                someFunction.call(task)
+                            });
+                            task.delay(1000);
                         };
                         someFunction();
                     }
