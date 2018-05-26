@@ -46,8 +46,8 @@
 .flame_off {
     background-image:url("../img/flame_off.png");
 }
-.flame_on {
-    background-image:url("../img/flame_on.png");
+.flame_onl {
+    background-image:url("../img/flame_onl.png");
 }
 #spinner {
 	position: absolute;
