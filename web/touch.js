@@ -83,6 +83,7 @@ Ext.application({
                     if (array[0].state == 0) {
                         var runner = new Ext.util.TaskRunner(),
                             task1;
+                        console.log(Ext.getCmp('task-' + array[0].deviceid));
                         if (Ext.getCmp('task-' + array[0].deviceid)) {
                             var task2 = new Ext.util.DelayedTask(function() {
                                 console.log('b');
