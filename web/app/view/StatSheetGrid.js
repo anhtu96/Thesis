@@ -37,12 +37,13 @@ Ext.define('myApp.view.StatSheetGrid', {
         }]
     }, {
         xtype: 'grid',
+        id: 'sheetgrid',
         columns: [{
             text: 'Name',
             dataIndex: 'devicename',
             flex: 1.5,
             renderer: function(value, metaData) {
-                console.log(value);
+                console.log(Ext.getCmp('sheetgrid'));
                 return value;
             },
         }, {
