@@ -43,7 +43,9 @@ Ext.define('myApp.view.StatSheetGrid', {
             dataIndex: 'devicename',
             flex: 1.5,
             renderer: function(value, meta) {
-                meta.css = 'custom-column';
+                if (value == 'Sensor 1') {
+                    value = '<b>Sensor 1</b>'
+                }
                 return value;
             }
         }, {

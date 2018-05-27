@@ -52,9 +52,6 @@
 .flame_danger {
     background-image:url("../img/flame_danger.png");
 }
-.custom-column {
-    font-size:20px; 
-}
 #spinner {
 	position: absolute;
    top:0;
