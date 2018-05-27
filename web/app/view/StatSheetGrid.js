@@ -41,12 +41,12 @@ Ext.define('myApp.view.StatSheetGrid', {
             text: 'Name',
             dataIndex: 'devicename',
             flex: 1.5,
-            renderer: function(value, record) {
-                console.log(record);
+            renderer: function(value, metaData) {
+                console.log(metaData);
                 if (value == 'Sensor 1') {
-                    record.style = "background-color:green;";
+                    metaData.attr = 'style="background-color:#ffaaaa !important;"';
                 } else {
-                    record.style = "background-color:red;";
+                    metaData.attr = 'style="background-color:#ffaaaa !important;"';
                 }
                 return value;
             }
