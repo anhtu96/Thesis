@@ -44,7 +44,7 @@ Ext.define('myApp.view.StatSheetGrid', {
             flex: 1.5,
             renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
                 console.log(record);
-                console.log(Ext.getCmp('sheetgrid').getCell());
+                console.log(Ext.getCmp('sheetgrid').getSelectionModel().getCurrentPosition());
                 if (value == 'Sensor 1') {
                     value = '<font color="red">Sensor 1</font>'
                 }
