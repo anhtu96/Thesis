@@ -45,11 +45,11 @@ Ext.define('myApp.view.StatSheetGrid', {
             renderer: function(value, metaData) {
                 console.log(metaData);
                 if (value == 'Sensor 1') {
+                    alert()
                     metaData.attr = 'style="background-color:#ffaaaa !important;"';
                 } else {
                     metaData.attr = 'style="background-color:#ffaaaa !important;"';
                 }
-                Ext.getCmp('sheetgrid').refresh();
                 return value;
             }
         }, {
