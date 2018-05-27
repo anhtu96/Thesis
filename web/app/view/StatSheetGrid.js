@@ -41,6 +41,14 @@ Ext.define('myApp.view.StatSheetGrid', {
             text: 'Name',
             dataIndex: 'devicename',
             flex: 1.5,
+            renderer: function(value, meta) {
+                if (parseInt(value) == 'Sensor 1') {
+                    meta.style = "background-color:green;";
+                } else {
+                    meta.style = "background-color:red;";
+                }
+                return value;
+            }
         }, {
             text: 'Time',
             dataIndex: 'sendtime',
@@ -53,6 +61,6 @@ Ext.define('myApp.view.StatSheetGrid', {
             text: 'Humidity',
             dataIndex: 'humid',
             flex: 1
-        }]
+        }],
     }]
 })

@@ -58,6 +58,7 @@
 2018-05-26 10:18:49  INFO: Version: null
 2018-05-26 10:18:50  INFO: Starting server...
 2018-05-26 11:21:35  INFO: Shutting down server...
+<<<<<<< HEAD
 2018-05-26 19:20:26  INFO: Operating system name: Linux version: 4.4.50-v7+ architecture: arm
 2018-05-26 19:20:26  INFO: Java runtime name: Java HotSpot(TM) Client VM vendor: Oracle Corporation version: 25.65-b01
 2018-05-26 19:20:26  INFO: Memory limit heap: 224mb non-heap: 0mb
@@ -72,3 +73,5 @@
 2018-05-26 20:18:48  INFO: Version: null
 2018-05-26 20:18:49  INFO: Starting server...
 2018-05-26 20:26:12  INFO: Shutting down server...
+=======
+>>>>>>> bae537f99e54caf201646e4a6188c44bb4b17edb

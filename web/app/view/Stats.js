@@ -12,7 +12,7 @@ Ext.define('myApp.view.Stats', {
         title: '<p style = color:white>Statistics</p>',
         items: [{
             xtype: 'toolbar',
-            title: 'Types of data representation',
+            title: 'Temperature - Humidity',
             style: 'margin-top:15px'
         }, {
             xtype: 'list',
@@ -25,6 +25,20 @@ Ext.define('myApp.view.Stats', {
             itemTpl: '{name}',
             listeners: {
                 select: 'representTap'
+            }
+        }, {
+            xtype: 'toolbar',
+            title: 'Flame sensors',
+            style: 'margin-top:15px',
+        }, {
+            xtype: 'list',
+            id: 'flameList',
+            data: [{
+                'name': 'Table'
+            }],
+            itemTpl: '{name}',
+            listeners: {
+                select: 'flameTap'
             }
         }]
     }],
