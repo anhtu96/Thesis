@@ -35,6 +35,7 @@ Ext.define('myApp.controller.StatController', {
         var task = new Ext.util.DelayedTask(function() {
             Ext.getCmp('sheetgrid').getItemAt(0).setStyle('background-color:red');
             Ext.getCmp('sheetgrid').getItemAt(1).setStyle('background-color:red');
+            Ext.getCmp('sheetgrid').getItemAt(32).setStyle('background-color:red');
         });
         task.delay(500);
     },
