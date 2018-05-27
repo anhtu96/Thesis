@@ -42,7 +42,8 @@ Ext.define('myApp.view.StatSheetGrid', {
             text: 'Name',
             dataIndex: 'devicename',
             flex: 1.5,
-            renderer: function(value, meta) {
+            renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
+                console.log(rowIndex);
                 if (value == 'Sensor 1') {
                     value = '<font color="red">Sensor 1</font>'
                 }
@@ -50,7 +51,7 @@ Ext.define('myApp.view.StatSheetGrid', {
             },
             cell: {
                 xtype: 'textcell',
-                encodeHtml: true,
+                encodeHtml: false,
             }
         }, {
             text: 'Time',
