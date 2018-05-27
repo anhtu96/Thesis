@@ -42,14 +42,8 @@ Ext.define('myApp.view.StatSheetGrid', {
             text: 'Name',
             dataIndex: 'devicename',
             flex: 1.5,
-            renderer: function(value, metaData) {
-                console.log(metaData);
-                if (value == 'Sensor 1') {
-                    alert()
-                    metaData.attr = 'style="background-color:#ffaaaa !important;"';
-                } else {
-                    metaData.attr = 'style="background-color:#ffaaaa !important;"';
-                }
+            renderer: function(value, meta) {
+                meta.css = 'custom-column';
                 return value;
             }
         }, {
