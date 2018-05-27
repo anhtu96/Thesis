@@ -32,6 +32,10 @@ Ext.define('myApp.controller.StatController', {
         var store = Ext.getStore('TempSensor');
         store.filter('deviceid', newval.get('deviceid'));
         selectfield.up('toolbar').up('sheet').down('grid').setStore(store);
+        var task = new Ext.util.DelayedTask(function() {
+            Ext.getCmp('sheetgrid').getItemAt(0).setStyle('color:red');
+        });
+        task.delay(500);
     },
     onResetGrid: function(button) {
         var store = Ext.getStore('TempSensor'),

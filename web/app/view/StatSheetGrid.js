@@ -43,7 +43,7 @@ Ext.define('myApp.view.StatSheetGrid', {
             dataIndex: 'devicename',
             flex: 1.5,
             renderer: function(value, metaData) {
-                console.log(Ext.getCmp('sheetgrid').getItemAt(0).setStyle('color:red'));
+
                 return value;
             },
         }, {
