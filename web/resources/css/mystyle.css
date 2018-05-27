@@ -53,7 +53,7 @@
     background-image:url("../img/flame_danger.png");
 }
 .custom-column {
-    background-color: #ccc; 
+    font-size:20px; 
 }
 #spinner {
 	position: absolute;
