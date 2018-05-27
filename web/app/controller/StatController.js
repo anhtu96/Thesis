@@ -33,7 +33,7 @@ Ext.define('myApp.controller.StatController', {
         store.filter('deviceid', newval.get('deviceid'));
         selectfield.up('toolbar').up('sheet').down('grid').setStore(store);
         var task = new Ext.util.DelayedTask(function() {
-            Ext.getCmp('sheetgrid').getView();
+            console.log(Ext.getCmp('sheetgrid').getCurrentPosition());
         });
         task.delay(500);
     },
