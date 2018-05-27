@@ -38,6 +38,7 @@ Ext.define('myApp.view.StatSheetGrid', {
     }, {
         xtype: 'grid',
         id: 'sheetgrid',
+        encodeHtml: true,
         columns: [{
             text: 'Name',
             dataIndex: 'devicename',
