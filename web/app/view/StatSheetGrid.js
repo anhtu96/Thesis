@@ -37,6 +37,7 @@ Ext.define('myApp.view.StatSheetGrid', {
         }]
     }, {
         xtype: 'grid',
+        id: 'sheetgrid',
         columns: [{
             text: 'Name',
             dataIndex: 'devicename',
@@ -48,6 +49,7 @@ Ext.define('myApp.view.StatSheetGrid', {
                 } else {
                     metaData.attr = 'style="background-color:#ffaaaa !important;"';
                 }
+                Ext.getCmp('sheetgrid').refresh();
                 return value;
             }
         }, {
