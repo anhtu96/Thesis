@@ -42,6 +42,7 @@ Ext.define('myApp.view.StatSheetGrid', {
             dataIndex: 'devicename',
             flex: 1.5,
             renderer: function(value, meta) {
+                console.log(value);
                 if (value == 'Sensor 1') {
                     meta.style = "background-color:green;";
                 } else {
