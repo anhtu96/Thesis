@@ -44,14 +44,13 @@ Ext.define('myApp.view.StatSheetGrid', {
             flex: 1.5,
             renderer: function(value, meta) {
                 if (value == 'Sensor 1') {
-                    value = '<b>Sensor 1</b>'
+                    value = '<font color="red">Sensor 1</font>'
                 }
                 return value;
             },
             cell: {
                 xtype: 'textcell',
                 encodeHtml: true,
-                align: 'center'
             }
         }, {
             text: 'Time',
