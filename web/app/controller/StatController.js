@@ -11,6 +11,11 @@ Ext.define('myApp.controller.StatController', {
             sheet.show();
         }
     },
+    flameTap: function(list) {
+        var sheet = Ext.create('myApp.view.StatSheetFlame');
+        Ext.Viewport.add(sheet);
+        sheet.show();
+    },
     onSelect: function(selectfield, newval) {
         var store = Ext.getStore('TempSensor');
         store.filter('deviceid', newval.get('deviceid'));
@@ -35,21 +40,25 @@ Ext.define('myApp.controller.StatController', {
         store.removeAll();
         store.sync();
     },
+    onSelectFlame: function(selectfield, newval) {
+        // var store = Ext.getStore('Flame');
+        // store.filter('deviceid', newval.get('deviceid'));
+        // selectfield.up('toolbar').up('sheet').down('grid').setStore(store);
+    },
+    onResetFlame: function(button) {
+        // var store = Ext.getStore('TempSensor'),
+        //     selectfield = button.up('toolbar').down('selectfield');
+        // store.filter('deviceid', selectfield.getValue());
+        // store.removeAll();
+        // store.sync();
+    },
     quantityTap: function(list) {
         list.setDisableSelection(true);
         var sheet;
-        if (Ext.getCmp('representList').getLastSelected().get('name') == 'Chart') {
-            if (list.getLastSelected().get('name') == 'Temperature') {
-                sheet = Ext.create('myApp.view.StatSheetTemp')
-            } else {
-                sheet = Ext.create('myApp.view.StatSheetHumid')
-            }
+        if (list.getLastSelected().get('name') == 'Temperature') {
+            sheet = Ext.create('myApp.view.StatSheetTemp')
         } else {
-            if (list.getLastSelected().get('name') == 'Temperature') {
-                sheet = Ext.create('myApp.view.StatSheetGridTemp')
-            } else {
-                sheet = Ext.create('myApp.view.StatSheetGridHumid')
-            }
+            sheet = Ext.create('myApp.view.StatSheetHumid')
         }
         Ext.Viewport.add(sheet);
         sheet.show();
