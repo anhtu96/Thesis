@@ -42,10 +42,6 @@ Ext.define('myApp.view.StatSheetGrid', {
             text: 'Name',
             dataIndex: 'devicename',
             flex: 1.5,
-            renderer: function(value, metaData) {
-
-                return value;
-            },
         }, {
             text: 'Time',
             dataIndex: 'sendtime',
