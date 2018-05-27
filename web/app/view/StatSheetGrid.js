@@ -43,15 +43,15 @@ Ext.define('myApp.view.StatSheetGrid', {
             dataIndex: 'devicename',
             flex: 1.5,
             renderer: function(value, metaData) {
+                console.log(value);
                 console.log(Ext.getCmp('sheetgrid'));
                 if (value == 'Sensor 1') {
-                    value = '<font color="red">Sensor 1</font>'
+                    value = 'Sensor 1'
                 }
                 return value;
             },
             cell: {
                 xtype: 'textcell',
-                encodeHtml: false,
             }
         }, {
             text: 'Time',
