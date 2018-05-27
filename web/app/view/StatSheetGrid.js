@@ -38,7 +38,6 @@ Ext.define('myApp.view.StatSheetGrid', {
     }, {
         xtype: 'grid',
         id: 'sheetgrid',
-        encodeHtml: true,
         columns: [{
             text: 'Name',
             dataIndex: 'devicename',
@@ -48,6 +47,11 @@ Ext.define('myApp.view.StatSheetGrid', {
                     value = '<b>Sensor 1</b>'
                 }
                 return value;
+            },
+            cell: {
+                xtype: 'textcell',
+                encodeHtml: true,
+                align: 'center'
             }
         }, {
             text: 'Time',
