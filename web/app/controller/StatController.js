@@ -33,9 +33,7 @@ Ext.define('myApp.controller.StatController', {
         store.filter('deviceid', newval.get('deviceid'));
         selectfield.up('toolbar').up('sheet').down('grid').setStore(store);
         var task = new Ext.util.DelayedTask(function() {
-            Ext.getCmp('sheetgrid').getItemAt(0).setStyle('background-color:red');
-            Ext.getCmp('sheetgrid').getItemAt(1).setStyle('background-color:red');
-            Ext.getCmp('sheetgrid').getItemAt(32).setStyle('background-color:red');
+            Ext.getCmp('sheetgrid').getView();
         });
         task.delay(500);
     },
