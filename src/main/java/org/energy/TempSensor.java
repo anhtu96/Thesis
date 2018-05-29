@@ -147,7 +147,7 @@ public class TempSensor implements Runnable {
                             Main.serial.write(crc_high);
                             start = System.currentTimeMillis();
                             duration = 0;
-                            while ((count < 1) && (duration < 3000)) {
+                            while ((count < 1) && (duration < 2000)) {
                                 duration = System.currentTimeMillis() - start;
                                 if ((1500 - duration < 100) && (duration < 1500)) {
                                     System.out.println("resend " + duration);
