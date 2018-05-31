@@ -71,7 +71,8 @@ Ext.application({
                 var record = store.findRecord('deviceid', array[0].deviceid, 0, false, false, true);
                 record.set({
                     onlinestatus: array[0].onlinestatus,
-                    color: array[0].color
+                    color: array[0].color,
+                    state: array[0].state
                 });
                 if (Ext.getCmp('flame-' + array[0].deviceid)) {
                     var btn = Ext.getCmp('flame-' + array[0].deviceid);
