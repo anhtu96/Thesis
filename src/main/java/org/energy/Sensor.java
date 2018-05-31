@@ -118,7 +118,7 @@ public class Sensor implements Runnable {
 
                         if ((data[6] == (byte) (checksum.getResult(data, data.length - 2) & 0x00ff)) && (data[7] == (byte) ((checksum.getResult(data, data.length - 2) & 0xff00) >> 8))) {
                             System.out.println("flame 3" + data[3]);
-                            SyncFlameHome.update((int) data[2], "online", "green", data[3]);
+                            SyncFlameHome.update((int) data[2], "online", "green", (int) data[3]);
                             countFlame++;
                             countTimeFlame++;
                             if (countTimeFlame == 1 && data[3] == 0) {
@@ -140,7 +140,7 @@ public class Sensor implements Runnable {
                 if (countTime > 3) {
                     countTime = 0;
                 }
-                if (countTimeFlame > 1) {
+                if (countTimeFlame > 2) {
                     countTimeFlame = 0;
                 }
                 rs = st.executeQuery("select * from tempsensorhome");

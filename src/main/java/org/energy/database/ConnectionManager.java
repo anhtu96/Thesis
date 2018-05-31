@@ -192,7 +192,7 @@ public class ConnectionManager {
 
     public synchronized void updateLightbulbHome(LightbulbHomeModel lightbulbhome) {
         long userId = 1;
-        SocketConnected.setStatus(true);
+        SocketConnected.setStatus(false);
         if (listeners.containsKey(userId)) {
             for (UpdateListener listener : listeners.get(userId)) {
                 SocketConnected.setStatus(true);
@@ -203,7 +203,7 @@ public class ConnectionManager {
 
     public synchronized void updateFlameHome(FlameHomeModel flamehome) {
         long userId = 1;
-        SocketConnected.setStatus(true);
+        SocketConnected.setStatus(false);
         if (listeners.containsKey(userId)) {
             for (UpdateListener listener : listeners.get(userId)) {
                 SocketConnected.setStatus(true);

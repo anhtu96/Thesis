@@ -19,6 +19,7 @@ import org.energy.model.FlameHomeModel;
 public class SyncFlameHome {
 
     public static void update(int deviceid, String onlinestatus, String color, int state) {
+
         FlameHomeModel flamehome = new FlameHomeModel();
         flamehome.setDeviceid(deviceid);
         flamehome.setOnlinestatus(onlinestatus);
@@ -32,7 +33,12 @@ public class SyncFlameHome {
         }
         if (!SocketConnected.isConnected()) {
             try {
-                System.out.println("dis");
+                System.out.println("dis flame");
+                System.out.println("update flamehome set "
+                        + " onlinestatus = " + "'" + onlinestatus + "'"
+                        + ", color = " + "'" + color + "'"
+                        + ", state = " + "'" + state + "'"
+                        + " where deviceid = " + deviceid);
                 MysqlConfig mysqlconfig = new MysqlConfig();
                 Connection conn = mysqlconfig.getConn();
                 Statement st = conn.createStatement();
@@ -41,6 +47,7 @@ public class SyncFlameHome {
                         + ", color = " + "'" + color + "'"
                         + ", state = " + "'" + state + "'"
                         + " where deviceid = " + deviceid);
+
             } catch (SQLException ex) {
                 Logger.getLogger(SyncTempSensorHome.class.getName()).log(Level.SEVERE, null, ex);
             }
