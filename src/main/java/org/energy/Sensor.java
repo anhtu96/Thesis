@@ -30,15 +30,15 @@ public class Sensor implements Runnable {
     private Statement st = null;
     private Statement stDisplay = null;
     private Statement stDisplay2 = null;
-    private byte[] sendTemp = {1, 0, 0, 0, 0, 2};
-    private byte[] sendFlame = {0, 0, 0, 0, 0, 1};
+    private final byte[] sendTemp = {1, 0, 0, 0, 0, 2};
+    private final byte[] sendFlame = {0, 0, 0, 0, 0, 1};
     // id = 1, sensor=0/control=1, "000" not used, require 2 sensors (temp + humid)
     public static byte[] check = new byte[2];
     public static int rcv, trans;
     public static boolean[] motorstate = new boolean[4];
     public static double[] sensor = new double[2];
-    int count = 0;
-    int countFlame = 0;
+    int cntTemp = 0;
+    int cntFlame = 0;
     int id[] = new int[256];
     byte crc_low = 0;
     byte crc_high = 0;
@@ -46,8 +46,8 @@ public class Sensor implements Runnable {
     private String devicename = null;
     private long start = 0;
     private long duration = 0;
-    private int countTime = 0;
-    private int countTimeFlame = 0;
+    private int cntTimeTemp = 0;
+    private int cntTimeFlame = 0;
     public static int waitFlag = 0;
     ResultSet rs = null;
     ResultSet rs2 = null;
@@ -104,13 +104,13 @@ public class Sensor implements Runnable {
                                     System.out.println("insert into tempdisplay (devicename,deviceid,temp,humid) VALUES ('" + devicename + "','" + (int) data[2] + "','" + sensor[0] + "','" + sensor[1] + "')");
                                 }
                                 SyncTempSensorHome.update((int) data[2], "online", "green");
-                                if (countTime == 3) {
+                                if (cntTimeTemp == 3) {
                                     Date date = new Date();
                                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                                     String sendtime = sdf.format(date);
                                     SyncTempSensor.insert((int) data[2], devicename, sendtime, sensor[0], sensor[1]);
                                 }
-                                count++;
+                                cntTemp++;
                             }
                         }
                     }
@@ -119,9 +119,8 @@ public class Sensor implements Runnable {
                         if ((data[6] == (byte) (checksum.getResult(data, data.length - 2) & 0x00ff)) && (data[7] == (byte) ((checksum.getResult(data, data.length - 2) & 0xff00) >> 8))) {
                             System.out.println("flame 3" + data[3]);
                             SyncFlameHome.update((int) data[2], "online", "green", (int) data[3]);
-                            countFlame++;
-                            countTimeFlame++;
-                            if (countTimeFlame == 1 && data[3] == 0) {
+                            cntFlame++;
+                            if (cntTimeFlame == 0 && data[3] == 0) {
                                 SendMail.send();
                             }
                         }
@@ -137,11 +136,11 @@ public class Sensor implements Runnable {
 
         while (true) {
             try {
-                if (countTime > 3) {
-                    countTime = 0;
+                if (cntTimeTemp > 3) {
+                    cntTimeTemp = 0;
                 }
-                if (countTimeFlame > 2) {
-                    countTimeFlame = 0;
+                if (cntTimeFlame > 3) {
+                    cntTimeFlame = 0;
                 }
                 rs = st.executeQuery("select * from tempsensorhome");
                 while (GlobalVars.getCheckTemp() == 0 && GlobalVars.getCheckLight() == 0) {
@@ -157,7 +156,7 @@ public class Sensor implements Runnable {
                         Main.serial.write(crc_high);
                         start = System.currentTimeMillis();
                         duration = 0;
-                        while ((count < 1) && (duration < 2000)) {
+                        while ((cntTemp < 1) && (duration < 2000)) {
                             duration = System.currentTimeMillis() - start;
                             if ((1500 - duration < 100) && (duration < 1500)) {
                                 System.out.println("resend " + duration);
@@ -168,11 +167,11 @@ public class Sensor implements Runnable {
                             Thread.sleep(100);
                         }
                         System.out.println(duration);
-                        if (count < 1) {
+                        if (cntTemp < 1) {
                             Date date = new Date();
                             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                             String sendtime = sdf.format(date);
-                            if (countTime == 3) {
+                            if (cntTimeTemp == 3) {
 //                                stSensor.executeUpdate("insert into tempsensor (deviceid,devicename,sendtime,temp,humid) values ('" + (int) sendTemp[2] + "','" + devicename + "','" + sendtime + "','" + 0 + "','" + 0 + "')");
                                 SyncTempSensor.insert((int) sendTemp[2], devicename, sendtime, 0, 0);
                             }
@@ -194,11 +193,11 @@ public class Sensor implements Runnable {
                             }
                             SyncTempSensorHome.update((int) sendTemp[2], "offline", "red");
                         }
-                        count = 0;
+                        cntTemp = 0;
                         Thread.sleep(500);
                     }
 //                        waitFlag = 1;
-                    countTime++;
+                    cntTimeTemp++;
                     rs = st.executeQuery("select * from flamehome");
                     while (rs.next()) {
                         sendFlame[2] = (byte) rs.getInt("deviceid");
@@ -209,7 +208,7 @@ public class Sensor implements Runnable {
                         Main.serial.write(crc_high);
                         start = System.currentTimeMillis();
                         duration = 0;
-                        while ((countFlame < 1) && (duration < 3000)) {
+                        while ((cntFlame < 1) && (duration < 3000)) {
                             duration = System.currentTimeMillis() - start;
                             if ((1500 - duration < 100) && (duration < 1500)) {
                                 System.out.println("resend flame " + duration);
@@ -219,35 +218,16 @@ public class Sensor implements Runnable {
                             }
                             Thread.sleep(100);
                         }
-                        if (countFlame < 1) {
+                        if (cntFlame < 1) {
                             Date date = new Date();
                             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                             String sendtime = sdf.format(date);
-//                                if (countTime == 1) {
-////                                stSensor.executeUpdate("insert into tempsensor (deviceid,devicename,sendtime,temp,humid) values ('" + (int) sendTemp[2] + "','" + devicename + "','" + sendtime + "','" + 0 + "','" + 0 + "')");
-//                                    SyncTempSensor.insert((int) sendTemp[2], devicename, sendtime, 0, 0);
-//                                }
-//                                int existed = 0;
-//                                rs2 = stDisplay2.executeQuery("select * from tempdisplay where deviceid like " + sendTemp[2]);
-//                                while (rs2.next()) {
-//                                    existed++;
-//                                }
-//                                rs2.close();
-//                                if (existed > 0) {
-////                                stDisplay.executeUpdate("delete from tempdisplay where deviceid like " + sendTemp[2]);
-//                                    SyncTempDisplay.delete((int) sendTemp[2]);
-//
-////                                stSensorHome.executeUpdate("update tempsensorhome set "
-////                                        + " state = " + "'offline',"
-////                                        + " color = " + "'red'"
-////                                        + " where deviceid = " + rs.getInt("deviceid"));
-//                                    System.out.println("delete from tempdisplay where deviceid like " + sendTemp[2]);
-//                                }
                             SyncFlameHome.update((int) sendFlame[2], "offline", "red", 1);
                         }
-                        countFlame = 0;
+                        cntFlame = 0;
                         Thread.sleep(500);
                     }
+                    cntTimeFlame++;
                     GlobalVars.setCheckTemp(1);
                 }
                 rs.close();
