@@ -154,7 +154,7 @@ public final class Main {
         generateMusic.start();
         Thread tempControl = new Thread(new TempControl());
         tempControl.start();
-        Thread tempSensor = new Thread(new TempSensor());
+        Thread tempSensor = new Thread(new Sensor());
         tempSensor.start();
         Thread lightControl = new Thread(new LightControl());
         lightControl.start();
