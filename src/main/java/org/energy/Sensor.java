@@ -122,6 +122,10 @@ public class Sensor implements Runnable {
                             cntFlame++;
                             if (cntTimeFlame == 0 && data[3] == 0) {
                                 SendMail.send();
+                                Date date = new Date();
+                                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                                String sendtime = sdf.format(date);
+                                SyncFlame.insert((int) data[2], devicename, sendtime);
                             }
                         }
                     }
@@ -201,6 +205,7 @@ public class Sensor implements Runnable {
                     rs = st.executeQuery("select * from flamehome");
                     while (rs.next()) {
                         sendFlame[2] = (byte) rs.getInt("deviceid");
+                        devicename = rs.getString("devicename");
                         crc_low = (byte) (checksum.getResult(sendFlame, sendFlame.length) & 0x00ff);
                         crc_high = (byte) ((checksum.getResult(sendFlame, sendFlame.length) & 0xff00) >> 8);
                         Main.serial.write(sendFlame);

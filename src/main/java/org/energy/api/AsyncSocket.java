@@ -34,6 +34,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import org.energy.model.FlameHomeModel;
+import org.energy.model.FlameModel;
 import org.energy.model.LightbulbHomeModel;
 import org.energy.model.TempControlHomeModel;
 
@@ -48,6 +49,7 @@ public class AsyncSocket extends WebSocketAdapter implements ConnectionManager.U
     private static final String KEY_TEMPCONTROLHOME = "tempcontrolhome";
     private static final String KEY_LIGHTBULBHOME = "lightbulbhome";
     private static final String KEY_FLAMEHOME = "flamehome";
+    private static final String KEY_FLAME = "flame";
 
     private long userId;
 
@@ -126,6 +128,13 @@ public class AsyncSocket extends WebSocketAdapter implements ConnectionManager.U
     public void onUpdateFlameHome(FlameHomeModel flamehome) {
         Map<String, Collection<?>> data = new HashMap<>();
         data.put(KEY_FLAMEHOME, Collections.singletonList(flamehome));
+        sendData(data);
+    }
+
+    @Override
+    public void onUpdateFlame(FlameModel flame) {
+        Map<String, Collection<?>> data = new HashMap<>();
+        data.put(KEY_FLAME, Collections.singletonList(flame));
         sendData(data);
     }
 

@@ -25,7 +25,6 @@ public class SyncTempSensor {
         tempsensor.setSendtime(sendtime);
         tempsensor.setTemp(temp);
         tempsensor.setHumid(humid);
-        System.out.println("sendtime " + sendtime);
         Context.getConnectionManager().updateTempSensor(tempsensor);
         try {
             Thread.sleep(100);

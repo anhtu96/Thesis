@@ -39,6 +39,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.energy.SocketConnected;
 import org.energy.model.FlameHomeModel;
+import org.energy.model.FlameModel;
 import org.energy.model.LightbulbHomeModel;
 import org.energy.model.TempControlHomeModel;
 
@@ -212,6 +213,17 @@ public class ConnectionManager {
         }
     }
 
+    public synchronized void updateFlame(FlameModel flame) {
+        long userId = 1;
+        SocketConnected.setStatus(false);
+        if (listeners.containsKey(userId)) {
+            for (UpdateListener listener : listeners.get(userId)) {
+                SocketConnected.setStatus(true);
+                listener.onUpdateFlame(flame);
+            }
+        }
+    }
+
     public synchronized void updateEvent(long userId, Event event, Position position) {
         if (listeners.containsKey(userId)) {
             for (UpdateListener listener : listeners.get(userId)) {
@@ -240,6 +252,8 @@ public class ConnectionManager {
         void onUpdateLightbulbHome(LightbulbHomeModel lightbulbhome);
 
         void onUpdateFlameHome(FlameHomeModel flamehome);
+
+        void onUpdateFlame(FlameModel flame);
     }
 
     public synchronized void addListener(long userId, UpdateListener listener) {
