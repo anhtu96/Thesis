@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.security.PermitAll;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -40,7 +42,7 @@ public class FlameHomeResource {
     @GET
     public ArrayList<FlameHomeModel> getStudentRecord() {
         ArrayList<FlameHomeModel> prod = new ArrayList<FlameHomeModel>();
-        System.out.println("hello GET flamehome");
+        System.out.println("GET FLAMEHOME");
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from flamehome");
@@ -58,47 +60,54 @@ public class FlameHomeResource {
             rs.close();
             st.close();
         } catch (SQLException ex) {
-            //System.out.println("hello loi GET");
+            Logger.getLogger(FlameHomeResource.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return prod;
     }
 
     @PermitAll
     @Path("{id}")
     @DELETE
-    public Response remove(@PathParam("id") long id) throws SQLException {
-        System.out.println("hello DELETE");
-        Statement st = conn.createStatement();
-        st.executeUpdate("DELETE FROM flamehome where id = " + id);
-        st.close();
+    public Response remove(@PathParam("id") long id) {
+        try {
+            System.out.println("DEL FLAMEHOME");
+            Statement st = conn.createStatement();
+            st.executeUpdate("DELETE FROM flamehome where id = " + id);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(FlameHomeResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return Response.noContent().build();
     }
 
     @PermitAll
     @Path("{id}")
     @PUT
-    public Response doPut(@PathParam("id") long id, FlameHomeModel entity) throws SQLException {
-        System.out.println("helloput");
-        Statement st = conn.createStatement();
-        String sqlvalue = "UPDATE flamehome SET"
-                + " deviceid = '" + entity.getDeviceid() + "'"
-                + ", devicename = '" + entity.getDevicename() + "'"
-                + ", state = '" + entity.getState() + "'"
-                + ", onlinestatus = '" + entity.getOnlinestatus() + "'"
-                + ", color = '" + entity.getColor() + "'"
-                + ", floor = '" + entity.getFloor() + "'"
-                + " WHERE id = '" + id + "'";
-        System.out.println(sqlvalue);
-        st.executeUpdate(sqlvalue);
-        st.close();
+    public Response doPut(@PathParam("id") long id, FlameHomeModel entity) {
+        try {
+            System.out.println("PUT FLAMEHOME");
+            Statement st = conn.createStatement();
+            String sqlvalue = "UPDATE flamehome SET"
+                    + " deviceid = '" + entity.getDeviceid() + "'"
+                    + ", devicename = '" + entity.getDevicename() + "'"
+                    + ", state = '" + entity.getState() + "'"
+                    + ", onlinestatus = '" + entity.getOnlinestatus() + "'"
+                    + ", color = '" + entity.getColor() + "'"
+                    + ", floor = '" + entity.getFloor() + "'"
+                    + " WHERE id = '" + id + "'";
+            System.out.println(sqlvalue);
+            st.executeUpdate(sqlvalue);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(FlameHomeResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 
     @PermitAll
     @POST
     public Response postStudentRecord(FlameHomeModel entity) {
-        System.out.println("hellopost");
+        System.out.println("POST FLAMEHOME");
         try {
             Statement st = conn.createStatement();
             String sqlvalue = "(id,deviceid,devicename,state,onlinestatus,color,floor) VALUES ('" + entity.getId() + "','" + entity.getDeviceid() + "','" + entity.getDevicename() + "','" + entity.getState() + "','" + entity.getOnlinestatus() + "','" + entity.getColor() + "','" + entity.getFloor() + "')";
@@ -107,7 +116,7 @@ public class FlameHomeResource {
             System.out.println("INSERT INTO flamehome " + sqlvalue);
             st.close();
         } catch (SQLException ex) {
-
+            Logger.getLogger(FlameHomeResource.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

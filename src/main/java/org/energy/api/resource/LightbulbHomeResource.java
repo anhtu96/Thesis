@@ -46,7 +46,7 @@ public class LightbulbHomeResource {
     @GET
     public ArrayList<LightbulbHomeModel> getStudentRecord() {
         ArrayList<LightbulbHomeModel> prod = new ArrayList<LightbulbHomeModel>();
-        System.out.println("hello GET lightbulbhome");
+        System.out.println("GET LIGHTHOME");
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from lightbulbhome");
@@ -65,75 +65,83 @@ public class LightbulbHomeResource {
             rs.close();
             st.close();
         } catch (SQLException ex) {
-            //System.out.println("hello loi GET");
+            Logger.getLogger(LightbulbHomeResource.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return prod;
     }
 
     @PermitAll
     @Path("{id}")
     @DELETE
-    public Response remove(@PathParam("id") long id) throws SQLException {
-        System.out.println("hello DELETE");
-        Statement st = conn.createStatement();
-        st.executeUpdate("DELETE FROM lightbulbhome where id = " + id);
-        st.close();
+    public Response remove(@PathParam("id") long id) {
+        try {
+            System.out.println("DEL LIGHTHOME");
+            Statement st = conn.createStatement();
+            st.executeUpdate("DELETE FROM lightbulbhome where id = " + id);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(LightbulbHomeResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return Response.noContent().build();
     }
 
     @PermitAll
     @Path("{id}")
     @PUT
-    public Response doPut(@PathParam("id") long id, LightbulbHomeModel entity) throws SQLException {
-        if (entity.getModestr().equals("manual")) {
-            byte[] sendData = new byte[6];
-            sendData[0] = 2;
-            sendData[1] = 0;
-            sendData[2] = (byte) entity.getDeviceid();
-            sendData[3] = 0;
-            sendData[4] = 0;
-            sendData[5] = (byte) entity.getState();
-            Checksum checksum = new Checksum();
-            byte crc_high;
-            byte crc_low;
-            crc_low = (byte) (checksum.getResult(sendData, sendData.length) & 0x00ff);
-            crc_high = (byte) ((checksum.getResult(sendData, sendData.length) & 0xff00) >> 8);
-            try {
-                if (!LightControl.rsHome.isClosed()) {
-                    LightControl.rsHome.close();
+    public Response doPut(@PathParam("id") long id, LightbulbHomeModel entity) {
+        try {
+            System.out.println("PUT LIGHTHOME");
+            if (entity.getModestr().equals("manual")) {
+                byte[] sendData = new byte[6];
+                sendData[0] = 2;
+                sendData[1] = 0;
+                sendData[2] = (byte) entity.getDeviceid();
+                sendData[3] = 0;
+                sendData[4] = 0;
+                sendData[5] = (byte) entity.getState();
+                Checksum checksum = new Checksum();
+                byte crc_high;
+                byte crc_low;
+                crc_low = (byte) (checksum.getResult(sendData, sendData.length) & 0x00ff);
+                crc_high = (byte) ((checksum.getResult(sendData, sendData.length) & 0xff00) >> 8);
+                try {
+                    if (!LightControl.rsHome.isClosed()) {
+                        LightControl.rsHome.close();
+                    }
+                    Main.serial.write(sendData);
+                    Main.serial.write(crc_low);
+                    Main.serial.write(crc_high);
+                } catch (IllegalStateException ex) {
+                    Logger.getLogger(LightbulbHomeResource.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(LightbulbHomeResource.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                Main.serial.write(sendData);
-                Main.serial.write(crc_low);
-                Main.serial.write(crc_high);
-            } catch (IllegalStateException ex) {
-                Logger.getLogger(LightbulbHomeResource.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(LightbulbHomeResource.class.getName()).log(Level.SEVERE, null, ex);
+
             }
 
+            Statement st = conn.createStatement();
+            String sqlvalue = "UPDATE lightbulbhome SET"
+                    + " devicename = '" + entity.getDevicename() + "'"
+                    + ", deviceid = '" + entity.getDeviceid() + "'"
+                    + ", modestr = '" + entity.getModestr() + "'"
+                    + ", state = '" + entity.getState() + "'"
+                    + ", onlinestatus = '" + entity.getOnlinestatus() + "'"
+                    + ", color = '" + entity.getColor() + "'"
+                    + ", floor = '" + entity.getFloor() + "'"
+                    + " WHERE id = '" + id + "'";
+            System.out.println(sqlvalue);
+            st.executeUpdate(sqlvalue);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(LightbulbHomeResource.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("helloput");
-        Statement st = conn.createStatement();
-        String sqlvalue = "UPDATE lightbulbhome SET"
-                + " devicename = '" + entity.getDevicename() + "'"
-                + ", deviceid = '" + entity.getDeviceid() + "'"
-                + ", modestr = '" + entity.getModestr() + "'"
-                + ", state = '" + entity.getState() + "'"
-                + ", onlinestatus = '" + entity.getOnlinestatus() + "'"
-                + ", color = '" + entity.getColor() + "'"
-                + ", floor = '" + entity.getFloor() + "'"
-                + " WHERE id = '" + id + "'";
-        System.out.println(sqlvalue);
-        st.executeUpdate(sqlvalue);
-        st.close();
         return null;
     }
 
     @PermitAll
     @POST
     public Response postStudentRecord(LightbulbHomeModel entity) {
-        System.out.println("hellopost");
+        System.out.println("POST LIGHTHOME");
         try {
             Statement st = conn.createStatement();
             String sqlvalue = "(id,devicename,deviceid,modestr,state,onlinestatus,color,floor) VALUES ('" + entity.getId() + "','" + entity.getDevicename() + "','" + entity.getDeviceid() + "','" + entity.getModestr() + "','" + entity.getState() + "','" + entity.getOnlinestatus() + "','" + entity.getColor() + "','" + entity.getFloor() + "')";
@@ -141,7 +149,7 @@ public class LightbulbHomeResource {
             st.executeUpdate("INSERT INTO lightbulbhome " + sqlvalue);
             st.close();
         } catch (SQLException ex) {
-
+            Logger.getLogger(LightbulbHomeResource.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

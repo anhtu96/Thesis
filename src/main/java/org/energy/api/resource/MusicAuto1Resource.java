@@ -62,7 +62,7 @@ public class MusicAuto1Resource extends BaseResource {
     @GET
     public ArrayList<MusicAuto1Model> getStudentRecord() {
         ArrayList<MusicAuto1Model> prod = new ArrayList<MusicAuto1Model>();
-        System.out.println("hello GET1");
+        System.out.println("GET MUSICAUTO 1");
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from musicautoch1");
@@ -79,60 +79,67 @@ public class MusicAuto1Resource extends BaseResource {
             rs.close();
             st.close();
         } catch (SQLException ex) {
-            //System.out.println("hello loi GET");
+            Logger.getLogger(MusicAuto1Resource.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return prod;
     }
 
     @PermitAll
     @Path("{id}")
     @DELETE
-    public Response remove(@PathParam("id") long id) throws SQLException {
-        System.out.println("hello DELETE");
-        if (PlayMusicAuto1.clip.isOpen()) {
-            PlayMusicAuto1.clip.close();
-            PlayMusicAuto1.rs.close();
-            PlayMusicAuto1.currentSong = "";
-            PlayMusicAuto1.songTmp = "";
+    public Response remove(@PathParam("id") long id) {
+        try {
+            System.out.println("DEL MUSICAUTO 1");
+            if (PlayMusicAuto1.clip.isOpen()) {
+                PlayMusicAuto1.clip.close();
+                PlayMusicAuto1.rs.close();
+                PlayMusicAuto1.currentSong = "";
+                PlayMusicAuto1.songTmp = "";
 
+            }
+            Statement st = conn.createStatement();
+            st.executeUpdate("DELETE FROM musicautoch1 where id = " + id);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MusicAuto1Resource.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Statement st = conn.createStatement();
-        st.executeUpdate("DELETE FROM musicautoch1 where id = " + id);
-        st.close();
         return Response.noContent().build();
     }
 
     @PermitAll
     @Path("{id}")
     @PUT
-    public Response doPut(@PathParam("id") long id, MusicAuto1Model entity) throws SQLException {
-        System.out.println("helloput");
-        if (PlayMusicAuto1.clip.isOpen()) {
-            PlayMusicAuto1.clip.close();
-            PlayMusicAuto1.rs.close();
-            PlayMusicAuto1.currentSong = "";
-            PlayMusicAuto1.songTmp = "";
+    public Response doPut(@PathParam("id") long id, MusicAuto1Model entity) {
+        try {
+            System.out.println("PUT MUSICAUTO 1");
+            if (PlayMusicAuto1.clip.isOpen()) {
+                PlayMusicAuto1.clip.close();
+                PlayMusicAuto1.rs.close();
+                PlayMusicAuto1.currentSong = "";
+                PlayMusicAuto1.songTmp = "";
 
+            }
+            Statement st = conn.createStatement();
+            String sqlvalue = "UPDATE musicautoch1 SET"
+                    + " name = '" + entity.getName() + "'"
+                    + ", hour = '" + entity.getHour() + "'"
+                    + ", min = '" + entity.getMin() + "'"
+                    + ", period = '" + entity.getPeriod() + "'"
+                    + ", state = '" + entity.getState() + "'"
+                    + " WHERE id = '" + id + "'";
+            System.out.println(sqlvalue);
+            st.executeUpdate(sqlvalue);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MusicAuto1Resource.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Statement st = conn.createStatement();
-        String sqlvalue = "UPDATE musicautoch1 SET"
-                + " name = '" + entity.getName() + "'"
-                + ", hour = '" + entity.getHour() + "'"
-                + ", min = '" + entity.getMin() + "'"
-                + ", period = '" + entity.getPeriod() + "'"
-                + ", state = '" + entity.getState() + "'"
-                + " WHERE id = '" + id + "'";
-        System.out.println(sqlvalue);
-        st.executeUpdate(sqlvalue);
-        st.close();
         return null;
     }
 
     @PermitAll
     @POST
     public Response postStudentRecord(MusicAuto1Model entity) {
-        System.out.println("hellopost auto1");
+        System.out.println("POST MUSICAUTO 1");
         try {
             System.out.println("heeeeh");
             if (PlayMusicAuto1.clip.isOpen()) {
@@ -150,7 +157,7 @@ public class MusicAuto1Resource extends BaseResource {
             st.executeUpdate("INSERT INTO musicautoch1 " + sqlvalue);
             st.close();
         } catch (SQLException ex) {
-            System.out.println("problem");
+            Logger.getLogger(MusicAuto1Resource.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

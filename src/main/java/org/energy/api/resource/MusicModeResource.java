@@ -61,7 +61,7 @@ public class MusicModeResource extends BaseResource {
     @GET
     public ArrayList<MusicModeModel> getStudentRecord() {
         ArrayList<MusicModeModel> prod = new ArrayList<MusicModeModel>();
-        System.out.println("hello GET mode");
+        System.out.println("GET MUSICMODE");
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from musicmode");
@@ -74,7 +74,7 @@ public class MusicModeResource extends BaseResource {
             rs.close();
             st.close();
         } catch (SQLException ex) {
-            //System.out.println("hello loi GET");
+            Logger.getLogger(MusicModeResource.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return prod;
@@ -83,32 +83,40 @@ public class MusicModeResource extends BaseResource {
     @PermitAll
     @Path("{id}")
     @DELETE
-    public Response remove(@PathParam("id") long id) throws SQLException {
-        System.out.println("hello DELETE");
-        Statement st = conn.createStatement();
-        st.executeUpdate("DELETE FROM musicmode where id = " + id);
-        st.close();
+    public Response remove(@PathParam("id") long id) {
+        try {
+            System.out.println("DEL MUSICMODE");
+            Statement st = conn.createStatement();
+            st.executeUpdate("DELETE FROM musicmode where id = " + id);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MusicModeResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return Response.noContent().build();
     }
 
     @PermitAll
     @Path("{id}")
     @PUT
-    public Response doPut(@PathParam("id") long id, MusicModeModel entity) throws SQLException {
-        System.out.println("helloput");
-        Statement st = conn.createStatement();
-        String sqlvalue = "UPDATE musicmode SET"
-                + " state = '" + entity.getState() + "'"
-                + " WHERE id = '" + id + "'";
-        st.executeUpdate(sqlvalue);
-        st.close();
+    public Response doPut(@PathParam("id") long id, MusicModeModel entity) {
+        try {
+            System.out.println("PUT MUSICMODE");
+            Statement st = conn.createStatement();
+            String sqlvalue = "UPDATE musicmode SET"
+                    + " state = '" + entity.getState() + "'"
+                    + " WHERE id = '" + id + "'";
+            st.executeUpdate(sqlvalue);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MusicModeResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 
     @PermitAll
     @POST
     public Response postStudentRecord(MusicModeModel entity) {
-        System.out.println("hellopost");
+        System.out.println("POST MUSICMODE");
         System.out.println(entity.getId());
         try {
             Statement st = conn.createStatement();
@@ -116,7 +124,7 @@ public class MusicModeResource extends BaseResource {
             st.executeUpdate("INSERT INTO musicmode " + sqlvalue);
             st.close();
         } catch (SQLException ex) {
-
+            Logger.getLogger(MusicModeResource.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

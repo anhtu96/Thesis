@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.security.PermitAll;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -40,7 +42,7 @@ public class FloorResource {
     @GET
     public ArrayList<FloorModel> getStudentRecord() {
         ArrayList<FloorModel> prod = new ArrayList<FloorModel>();
-        System.out.println("hello GET floor");
+        System.out.println("GET FLOOR");
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from floor");
@@ -53,42 +55,49 @@ public class FloorResource {
             rs.close();
             st.close();
         } catch (SQLException ex) {
-            //System.out.println("hello loi GET");
+            Logger.getLogger(FloorResource.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return prod;
     }
 
     @PermitAll
     @Path("{id}")
     @DELETE
-    public Response remove(@PathParam("id") long id) throws SQLException {
-        System.out.println("hello DELETE");
-        Statement st = conn.createStatement();
-        st.executeUpdate("DELETE FROM floor where id = " + id);
-        st.close();
+    public Response remove(@PathParam("id") long id) {
+        try {
+            System.out.println("DEL FLOOR");
+            Statement st = conn.createStatement();
+            st.executeUpdate("DELETE FROM floor where id = " + id);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(FloorResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return Response.noContent().build();
     }
 
     @PermitAll
     @Path("{id}")
     @PUT
-    public Response doPut(@PathParam("id") long id, FloorModel entity) throws SQLException {
-        System.out.println("helloput");
-        Statement st = conn.createStatement();
-        String sqlvalue = "UPDATE floor SET"
-                + " num = '" + entity.getNum() + "'"
-                + " WHERE id = '" + id + "'";
-        System.out.println(sqlvalue);
-        st.executeUpdate(sqlvalue);
-        st.close();
+    public Response doPut(@PathParam("id") long id, FloorModel entity) {
+        try {
+            System.out.println("PUT FLOOR");
+            Statement st = conn.createStatement();
+            String sqlvalue = "UPDATE floor SET"
+                    + " num = '" + entity.getNum() + "'"
+                    + " WHERE id = '" + id + "'";
+            System.out.println(sqlvalue);
+            st.executeUpdate(sqlvalue);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(FloorResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 
     @PermitAll
     @POST
     public Response postStudentRecord(FloorModel entity) {
-        System.out.println("hellopost");
+        System.out.println("POST FLOOR");
         try {
             Statement st = conn.createStatement();
             String sqlvalue = "(id,num) VALUES ('" + entity.getId() + "','" + entity.getNum() + "')";
@@ -97,7 +106,7 @@ public class FloorResource {
             System.out.println("INSERT INTO floor " + sqlvalue);
             st.close();
         } catch (SQLException ex) {
-
+            Logger.getLogger(FloorResource.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

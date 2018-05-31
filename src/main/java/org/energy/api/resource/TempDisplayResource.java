@@ -6,11 +6,12 @@
 package org.energy.api.resource;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.security.PermitAll;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -41,7 +42,7 @@ public class TempDisplayResource {
     @GET
     public ArrayList<TempDisplayModel> getStudentRecord() {
         ArrayList<TempDisplayModel> prod = new ArrayList<TempDisplayModel>();
-        System.out.println("hello GET tempdisplay");
+        System.out.println("GET TEMPDISPLAY");
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from tempdisplay");
@@ -57,45 +58,52 @@ public class TempDisplayResource {
             rs.close();
             st.close();
         } catch (SQLException ex) {
-            //System.out.println("hello loi GET");
+            Logger.getLogger(TempDisplayResource.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return prod;
     }
 
     @PermitAll
     @Path("{id}")
     @DELETE
-    public Response remove(@PathParam("id") long id) throws SQLException {
-        System.out.println("hello DELETE");
-        Statement st = conn.createStatement();
-        st.executeUpdate("DELETE FROM tempdisplay where id = " + id);
-        st.close();
+    public Response remove(@PathParam("id") long id) {
+        try {
+            System.out.println("DEL TEMPDISPLAY");
+            Statement st = conn.createStatement();
+            st.executeUpdate("DELETE FROM tempdisplay where id = " + id);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(TempDisplayResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return Response.noContent().build();
     }
 
     @PermitAll
     @Path("{id}")
     @PUT
-    public Response doPut(@PathParam("id") long id, TempDisplayModel entity) throws SQLException {
-        System.out.println("helloput");
-        Statement st = conn.createStatement();
-        String sqlvalue = "UPDATE tempdisplay SET"
-                + " devicename = '" + entity.getDevicename() + "'"
-                + ", deviceid = '" + entity.getDeviceid() + "'"
-                + ", temp = '" + entity.getTemp() + "'"
-                + ", humid = '" + entity.getHumid() + "'"
-                + " WHERE id = '" + id + "'";
-        System.out.println(sqlvalue);
-        st.executeUpdate(sqlvalue);
-        st.close();
+    public Response doPut(@PathParam("id") long id, TempDisplayModel entity) {
+        try {
+            System.out.println("PUT TEMPDISPLAY");
+            Statement st = conn.createStatement();
+            String sqlvalue = "UPDATE tempdisplay SET"
+                    + " devicename = '" + entity.getDevicename() + "'"
+                    + ", deviceid = '" + entity.getDeviceid() + "'"
+                    + ", temp = '" + entity.getTemp() + "'"
+                    + ", humid = '" + entity.getHumid() + "'"
+                    + " WHERE id = '" + id + "'";
+            System.out.println(sqlvalue);
+            st.executeUpdate(sqlvalue);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(TempDisplayResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 
     @PermitAll
     @POST
     public Response postStudentRecord(TempDisplayModel entity) {
-        System.out.println("hellopost");
+        System.out.println("POST TEMPDISPLAY");
         try {
             Statement st = conn.createStatement();
             String sqlvalue = "(id,devicename,deviceid,temp,humid) VALUES ('" + entity.getId() + "','" + entity.getDevicename() + "','" + entity.getDeviceid() + "','" + entity.getTemp() + "','" + entity.getHumid() + "')";
@@ -103,7 +111,7 @@ public class TempDisplayResource {
             st.executeUpdate("INSERT INTO tempdisplay " + sqlvalue);
             st.close();
         } catch (SQLException ex) {
-
+            Logger.getLogger(TempDisplayResource.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

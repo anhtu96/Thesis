@@ -52,7 +52,7 @@ public class TempControlResource {
     @GET
     public ArrayList<TempControlModel> getStudentRecord() {
         ArrayList<TempControlModel> prod = new ArrayList<TempControlModel>();
-        System.out.println("hello GET tempcontrol");
+        System.out.println("GET TEMPCONTROL");
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from tempcontrol");
@@ -73,53 +73,57 @@ public class TempControlResource {
             rs.close();
             st.close();
         } catch (SQLException ex) {
-            //System.out.println("hello loi GET");
+            Logger.getLogger(TempControlResource.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return prod;
     }
 
     @PermitAll
     @Path("{id}")
     @DELETE
-    public Response remove(@PathParam("id") long id, TempControlModel entity) throws SQLException {
-        System.out.println("hello DELETE");
-        Statement st = conn.createStatement();
-        if (!TempControl.rs.isClosed()) {
-            TempControl.rs.close();
-        }
-        st.executeUpdate("DELETE FROM tempcontrol where id = " + id);
-//        TempControl.rs.close();
-        byte[] sendData = {1, 1, (byte) entity.getDeviceid(), 0, 0, 0};
-        crc = checksum.getResult(sendData, sendData.length);
-        crc_low = (byte) (crc & 0x00ff);
-        crc_high = (byte) ((crc & 0xff00) >> 8);
+    public Response remove(@PathParam("id") long id, TempControlModel entity) {
         try {
-            Main.serial.write(sendData);
-            Main.serial.write(crc_low);
-            Main.serial.write(crc_high);
-        } catch (IllegalStateException ex) {
-            Logger.getLogger(TempControlResource.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+            System.out.println("DEL TEMPCONTROL");
+            Statement st = conn.createStatement();
+            if (!TempControl.rs.isClosed()) {
+                TempControl.rs.close();
+            }
+            st.executeUpdate("DELETE FROM tempcontrol where id = " + id);
+//        TempControl.rs.close();
+            byte[] sendData = {1, 1, (byte) entity.getDeviceid(), 0, 0, 0};
+            crc = checksum.getResult(sendData, sendData.length);
+            crc_low = (byte) (crc & 0x00ff);
+            crc_high = (byte) ((crc & 0xff00) >> 8);
+            try {
+                Main.serial.write(sendData);
+                Main.serial.write(crc_low);
+                Main.serial.write(crc_high);
+            } catch (IllegalStateException ex) {
+                Logger.getLogger(TempControlResource.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(TempControlResource.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            st.close();
+        } catch (SQLException ex) {
             Logger.getLogger(TempControlResource.class.getName()).log(Level.SEVERE, null, ex);
         }
-        st.close();
         return Response.noContent().build();
     }
 
     @PermitAll
     @Path("{id}")
     @PUT
-    public Response doPut(@PathParam("id") long id, TempControlModel entity) throws SQLException {
-        System.out.println("helloput");
-        Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery("select * from tempcontrol where id like " + id);
-        byte[] sendData = new byte[6];
-        sendData[0] = 1;
-        sendData[1] = 1;
-        if (!TempControl.rs.isClosed()) {
-            TempControl.rs.close();
-        }
+    public Response doPut(@PathParam("id") long id, TempControlModel entity) {
+        try {
+            System.out.println("PUT TEMPCONTROL");
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select * from tempcontrol where id like " + id);
+            byte[] sendData = new byte[6];
+            sendData[0] = 1;
+            sendData[1] = 1;
+            if (!TempControl.rs.isClosed()) {
+                TempControl.rs.close();
+            }
 //        while (rs.next()) {
 //            if (rs.getInt("deviceid") != entity.getDeviceid()) {
 //                System.out.println("DEVICEID " + rs.getInt("deviceid"));
@@ -143,46 +147,49 @@ public class TempControlResource {
 //
 //        }
 
-        sendData[2] = (byte) entity.getDeviceid();
-        if (entity.getAuto() == 0) {
-            sendData[3] = 0;
-            sendData[4] = (byte) entity.getFanspeed();
-            sendData[5] = (byte) entity.getMist();
-            crc = checksum.getResult(sendData, sendData.length);
-            crc_low = (byte) (crc & 0x00ff);
-            crc_high = (byte) ((crc & 0xff00) >> 8);
-            try {
-                Main.serial.write(sendData);
-                Main.serial.write(crc_low);
-                Main.serial.write(crc_high);
-            } catch (IllegalStateException ex) {
-                Logger.getLogger(TempControlResource.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(TempControlResource.class.getName()).log(Level.SEVERE, null, ex);
+            sendData[2] = (byte) entity.getDeviceid();
+            if (entity.getAuto() == 0) {
+                sendData[3] = 0;
+                sendData[4] = (byte) entity.getFanspeed();
+                sendData[5] = (byte) entity.getMist();
+                crc = checksum.getResult(sendData, sendData.length);
+                crc_low = (byte) (crc & 0x00ff);
+                crc_high = (byte) ((crc & 0xff00) >> 8);
+                try {
+                    Main.serial.write(sendData);
+                    Main.serial.write(crc_low);
+                    Main.serial.write(crc_high);
+                } catch (IllegalStateException ex) {
+                    Logger.getLogger(TempControlResource.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(TempControlResource.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-        }
 
-        String sqlvalue = "UPDATE tempcontrol SET"
-                + " devicename = '" + entity.getDevicename() + "'"
-                + ", deviceid = '" + entity.getDeviceid() + "'"
-                + ", auto = '" + entity.getAuto() + "'"
-                + ", modestr = '" + entity.getModestr() + "'"
-                + ", tempset = '" + entity.getTempset() + "'"
-                + ", humidset = '" + entity.getHumidset() + "'"
-                + ", mist = '" + entity.getMist() + "'"
-                + ", fanspeed = '" + entity.getFanspeed() + "'"
-                + ", sensor = '" + entity.getSensor() + "'"
-                + " WHERE id = '" + id + "'";
-        System.out.println(sqlvalue);
-        st.executeUpdate(sqlvalue);
-        st.close();
+            String sqlvalue = "UPDATE tempcontrol SET"
+                    + " devicename = '" + entity.getDevicename() + "'"
+                    + ", deviceid = '" + entity.getDeviceid() + "'"
+                    + ", auto = '" + entity.getAuto() + "'"
+                    + ", modestr = '" + entity.getModestr() + "'"
+                    + ", tempset = '" + entity.getTempset() + "'"
+                    + ", humidset = '" + entity.getHumidset() + "'"
+                    + ", mist = '" + entity.getMist() + "'"
+                    + ", fanspeed = '" + entity.getFanspeed() + "'"
+                    + ", sensor = '" + entity.getSensor() + "'"
+                    + " WHERE id = '" + id + "'";
+            System.out.println(sqlvalue);
+            st.executeUpdate(sqlvalue);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(TempControlResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 
     @PermitAll
     @POST
     public Response postStudentRecord(TempControlModel entity) {
-        System.out.println("hellopost");
+        System.out.println("POST TEMPCONTROL");
         try {
             byte[] sendData = new byte[6];
             sendData[0] = 1;
@@ -211,7 +218,7 @@ public class TempControlResource {
             st.executeUpdate("INSERT INTO tempcontrol " + sqlvalue);
             st.close();
         } catch (SQLException ex) {
-
+            Logger.getLogger(TempControlResource.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

@@ -6,11 +6,12 @@
 package org.energy.api.resource;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.security.PermitAll;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -23,7 +24,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.energy.MysqlConfig;
-import org.energy.PlayMusicManual1;
 import org.energy.model.MusicManual1Model;
 
 /**
@@ -42,7 +42,7 @@ public class MusicManual1Resource {
     @GET
     public ArrayList<MusicManual1Model> getStudentRecord() {
         ArrayList<MusicManual1Model> prod = new ArrayList<MusicManual1Model>();
-        System.out.println("hello GET2");
+        System.out.println("GET MUSICMANUAL 1");
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from musicmanual1");
@@ -55,7 +55,7 @@ public class MusicManual1Resource {
             rs.close();
             st.close();
         } catch (SQLException ex) {
-            //System.out.println("hello loi GET");
+            Logger.getLogger(MusicManual1Resource.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return prod;
@@ -64,32 +64,40 @@ public class MusicManual1Resource {
     @PermitAll
     @Path("{id}")
     @DELETE
-    public Response remove(@PathParam("id") long id) throws SQLException {
-        System.out.println("hello DELETE");
-        Statement st = conn.createStatement();
-        st.executeUpdate("DELETE FROM musicmanual1 where id = " + id);
-        st.close();
+    public Response remove(@PathParam("id") long id) {
+        try {
+            System.out.println("DEL MUSICMANUAL 1");
+            Statement st = conn.createStatement();
+            st.executeUpdate("DELETE FROM musicmanual1 where id = " + id);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MusicManual1Resource.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return Response.noContent().build();
     }
 
     @PermitAll
     @Path("{id}")
     @PUT
-    public Response doPut(@PathParam("id") long id, MusicManual1Model entity) throws SQLException {
-        System.out.println("helloput");
-        Statement st = conn.createStatement();
-        String sqlvalue = "UPDATE musicmanual1 SET"
-                + " name = '" + entity.getName() + "'"
-                + " WHERE id = '" + id + "'";
-        st.executeUpdate(sqlvalue);
-        st.close();
+    public Response doPut(@PathParam("id") long id, MusicManual1Model entity) {
+        try {
+            System.out.println("PUT MUSICMANUAL 1");
+            Statement st = conn.createStatement();
+            String sqlvalue = "UPDATE musicmanual1 SET"
+                    + " name = '" + entity.getName() + "'"
+                    + " WHERE id = '" + id + "'";
+            st.executeUpdate(sqlvalue);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MusicManual1Resource.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 
     @PermitAll
     @POST
     public Response postStudentRecord(MusicManual1Model entity) {
-        System.out.println("hellopost");
+        System.out.println("POST MUSICMANUAL 1");
         try {
             Statement st = conn.createStatement();
             String sqlvalue = "(id,name) VALUES ('" + entity.getId() + "','" + entity.getName() + "')";
@@ -97,7 +105,7 @@ public class MusicManual1Resource {
             st.executeUpdate("INSERT INTO musicmanual1 " + sqlvalue);
             st.close();
         } catch (SQLException ex) {
-
+            Logger.getLogger(MusicManual1Resource.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

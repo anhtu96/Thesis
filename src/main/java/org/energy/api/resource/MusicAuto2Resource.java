@@ -6,11 +6,12 @@
 package org.energy.api.resource;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.security.PermitAll;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -42,7 +43,7 @@ public class MusicAuto2Resource {
     @GET
     public ArrayList<MusicAuto2Model> getStudentRecord() {
         ArrayList<MusicAuto2Model> prod = new ArrayList<MusicAuto2Model>();
-        System.out.println("hello GET2");
+        System.out.println("GET MUSICAUTO 2");
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from musicautoch2");
@@ -61,59 +62,66 @@ public class MusicAuto2Resource {
             rs.close();
             st.close();
         } catch (SQLException ex) {
-            //System.out.println("hello loi GET");
+            Logger.getLogger(MusicAuto2Resource.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return prod;
     }
 
     @PermitAll
     @Path("{id}")
     @DELETE
-    public Response remove(@PathParam("id") long id) throws SQLException {
-        System.out.println("hello DELETE");
-        if (PlayMusicAuto2.clip.isOpen()) {
-            PlayMusicAuto2.clip.close();
-            PlayMusicAuto2.currentSong = "";
-            PlayMusicAuto2.songTmp = "";
-            PlayMusicAuto2.rs.close();
+    public Response remove(@PathParam("id") long id) {
+        try {
+            System.out.println("DEL MUSICAUTO 2");
+            if (PlayMusicAuto2.clip.isOpen()) {
+                PlayMusicAuto2.clip.close();
+                PlayMusicAuto2.currentSong = "";
+                PlayMusicAuto2.songTmp = "";
+                PlayMusicAuto2.rs.close();
+            }
+            Statement st = conn.createStatement();
+            st.executeUpdate("DELETE FROM musicautoch2 where id = " + id);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MusicAuto2Resource.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Statement st = conn.createStatement();
-        st.executeUpdate("DELETE FROM musicautoch2 where id = " + id);
-        st.close();
         return Response.noContent().build();
     }
 
     @PermitAll
     @Path("{id}")
     @PUT
-    public Response doPut(@PathParam("id") long id, MusicAuto2Model entity) throws SQLException {
-        System.out.println("helloput");
-        if (PlayMusicAuto2.clip.isOpen()) {
-            PlayMusicAuto2.clip.close();
-            PlayMusicAuto2.currentSong = "";
-            PlayMusicAuto2.songTmp = "";
-            PlayMusicAuto2.rs.close();
+    public Response doPut(@PathParam("id") long id, MusicAuto2Model entity) {
+        try {
+            System.out.println("PUT MUSICAUTO 2");
+            if (PlayMusicAuto2.clip.isOpen()) {
+                PlayMusicAuto2.clip.close();
+                PlayMusicAuto2.currentSong = "";
+                PlayMusicAuto2.songTmp = "";
+                PlayMusicAuto2.rs.close();
+            }
+            Statement st = conn.createStatement();
+            String sqlvalue = "UPDATE musicautoch2 SET"
+                    + " name = '" + entity.getName() + "'"
+                    + ", hour = '" + entity.getHour() + "'"
+                    + ", min = '" + entity.getMin() + "'"
+                    + ", period = '" + entity.getPeriod() + "'"
+                    + ", state = '" + entity.getState() + "'"
+                    + ", color1 = '" + entity.getColor1() + "'"
+                    + ", color2 = '" + entity.getColor2() + "'"
+                    + " WHERE id = '" + id + "'";
+            st.executeUpdate(sqlvalue);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MusicAuto2Resource.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Statement st = conn.createStatement();
-        String sqlvalue = "UPDATE musicautoch2 SET"
-                + " name = '" + entity.getName() + "'"
-                + ", hour = '" + entity.getHour() + "'"
-                + ", min = '" + entity.getMin() + "'"
-                + ", period = '" + entity.getPeriod() + "'"
-                + ", state = '" + entity.getState() + "'"
-                + ", color1 = '" + entity.getColor1() + "'"
-                + ", color2 = '" + entity.getColor2() + "'"
-                + " WHERE id = '" + id + "'";
-        st.executeUpdate(sqlvalue);
-        st.close();
         return null;
     }
 
     @PermitAll
     @POST
     public Response postStudentRecord(MusicAuto2Model entity) {
-        System.out.println("hellopost");
+        System.out.println("POST MUSICAUTO 2");
         try {
             if (PlayMusicAuto2.clip.isOpen()) {
                 PlayMusicAuto2.clip.close();
@@ -126,7 +134,7 @@ public class MusicAuto2Resource {
             st.executeUpdate("INSERT INTO musicautoch2 " + sqlvalue);
             st.close();
         } catch (SQLException ex) {
-
+            Logger.getLogger(MusicAuto2Resource.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

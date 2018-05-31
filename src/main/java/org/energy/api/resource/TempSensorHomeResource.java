@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.security.PermitAll;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -41,7 +43,7 @@ public class TempSensorHomeResource {
     @GET
     public ArrayList<TempSensorHomeModel> getStudentRecord() {
         ArrayList<TempSensorHomeModel> prod = new ArrayList<TempSensorHomeModel>();
-        System.out.println("hello GET tempsensorhome");
+        System.out.println("GET TEMPSENSORHOME");
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from tempsensorhome");
@@ -58,7 +60,7 @@ public class TempSensorHomeResource {
             rs.close();
             st.close();
         } catch (SQLException ex) {
-            //System.out.println("hello loi GET");
+            Logger.getLogger(TempSensorHomeResource.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return prod;
@@ -67,37 +69,45 @@ public class TempSensorHomeResource {
     @PermitAll
     @Path("{id}")
     @DELETE
-    public Response remove(@PathParam("id") long id) throws SQLException {
-        System.out.println("hello DELETE");
-        Statement st = conn.createStatement();
-        st.executeUpdate("DELETE FROM tempsensorhome where id = " + id);
-        st.close();
+    public Response remove(@PathParam("id") long id) {
+        try {
+            System.out.println("DEL TEMPSENSORHOME");
+            Statement st = conn.createStatement();
+            st.executeUpdate("DELETE FROM tempsensorhome where id = " + id);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(TempSensorHomeResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return Response.noContent().build();
     }
 
     @PermitAll
     @Path("{id}")
     @PUT
-    public Response doPut(@PathParam("id") long id, TempSensorHomeModel entity) throws SQLException {
-        System.out.println("helloput");
-        Statement st = conn.createStatement();
-        String sqlvalue = "UPDATE tempsensorhome SET"
-                + " devicename = '" + entity.getDevicename() + "'"
-                + ", deviceid = '" + entity.getDeviceid() + "'"
-                + ", state = '" + entity.getState() + "'"
-                + ", color = '" + entity.getColor() + "'"
-                + ", floor = '" + entity.getFloor() + "'"
-                + " WHERE id = '" + id + "'";
-        System.out.println(sqlvalue);
-        st.executeUpdate(sqlvalue);
-        st.close();
+    public Response doPut(@PathParam("id") long id, TempSensorHomeModel entity) {
+        try {
+            System.out.println("PUT TEMPSENSORHOME");
+            Statement st = conn.createStatement();
+            String sqlvalue = "UPDATE tempsensorhome SET"
+                    + " devicename = '" + entity.getDevicename() + "'"
+                    + ", deviceid = '" + entity.getDeviceid() + "'"
+                    + ", state = '" + entity.getState() + "'"
+                    + ", color = '" + entity.getColor() + "'"
+                    + ", floor = '" + entity.getFloor() + "'"
+                    + " WHERE id = '" + id + "'";
+            System.out.println(sqlvalue);
+            st.executeUpdate(sqlvalue);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(TempSensorHomeResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 
     @PermitAll
     @POST
     public Response postStudentRecord(TempSensorHomeModel entity) {
-        System.out.println("hellopost");
+        System.out.println("POST TEMPSENSORHOME");
         try {
             Statement st = conn.createStatement();
             String sqlvalue = "(id,devicename,deviceid,state,color,floor) VALUES ('" + entity.getId() + "','" + entity.getDevicename() + "','" + entity.getDeviceid() + "','" + entity.getState() + "','" + entity.getColor() + "','" + entity.getFloor() + "')";
@@ -105,7 +115,7 @@ public class TempSensorHomeResource {
             st.executeUpdate("INSERT INTO tempsensorhome " + sqlvalue);
             st.close();
         } catch (SQLException ex) {
-
+            Logger.getLogger(TempSensorHomeResource.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

@@ -42,7 +42,7 @@ public class MusicManual2Resource {
     @GET
     public ArrayList<MusicManual2Model> getStudentRecord() {
         ArrayList<MusicManual2Model> prod = new ArrayList<MusicManual2Model>();
-        System.out.println("hello GET2");
+        System.out.println("GET MUSICMANUAL 2");
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("select * from musicmanual2");
@@ -57,7 +57,6 @@ public class MusicManual2Resource {
         } catch (SQLException ex) {
             Logger.getLogger(MusicManual2Resource.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return prod;
     }
 
@@ -66,7 +65,7 @@ public class MusicManual2Resource {
     @DELETE
     public Response remove(@PathParam("id") long id) {
         try {
-            System.out.println("hello DELETE manual 2");
+            System.out.println("DEL MUSICMANUAL 2");
             Statement st = conn.createStatement();
             st.executeUpdate("DELETE FROM musicmanual2 where id = " + id);
             st.close();
@@ -82,7 +81,7 @@ public class MusicManual2Resource {
     @PUT
     public Response doPut(@PathParam("id") long id, MusicManual2Model entity) {
         try {
-            System.out.println("helloput");
+            System.out.println("PUT MUSICMANUAL 2");
             Statement st = conn.createStatement();
             String sqlvalue = "UPDATE musicmanual2 SET"
                     + " name = '" + entity.getName() + "'"
@@ -99,7 +98,7 @@ public class MusicManual2Resource {
     @PermitAll
     @POST
     public Response postStudentRecord(MusicManual2Model entity) {
-        System.out.println("hellopost");
+        System.out.println("POST MUSICMANUAL 2");
         try {
             Statement st = conn.createStatement();
             String sqlvalue = "(id,name) VALUES ('" + entity.getId() + "','" + entity.getName() + "')";
