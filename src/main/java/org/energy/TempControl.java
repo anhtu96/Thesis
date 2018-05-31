@@ -139,9 +139,9 @@ public class TempControl implements Runnable {
                 rs.close();
                 Thread.sleep(500);
             } catch (InterruptedException ex) {
-                Logger.getLogger(TempSensor.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Sensor.class.getName()).log(Level.SEVERE, null, ex);
             } catch (UnsupportedBoardType ex) {
-                Logger.getLogger(TempSensor.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Sensor.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IllegalStateException ex) {
                 Logger.getLogger(TempControl.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
