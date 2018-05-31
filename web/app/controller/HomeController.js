@@ -405,6 +405,7 @@ Ext.define('myApp.controller.HomeController', {
                     });
                     storeFlame.each(function(record) {
                         if (record.get('floor') == i) {
+                            console.log(record.get('state'));
                             var btn = Ext.create('Ext.Button', {
                                 id: 'flame-' + record.get('deviceid'),
                                 deviceid: record.get('deviceid'),
