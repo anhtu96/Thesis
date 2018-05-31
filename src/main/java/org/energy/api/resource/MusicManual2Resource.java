@@ -6,11 +6,12 @@
 package org.energy.api.resource;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.security.PermitAll;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -23,8 +24,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.energy.MysqlConfig;
-import org.energy.PlayMusicAuto2;
-import org.energy.model.MusicAuto2Model;
 import org.energy.model.MusicManual2Model;
 
 /**
@@ -56,7 +55,7 @@ public class MusicManual2Resource {
             rs.close();
             st.close();
         } catch (SQLException ex) {
-            //System.out.println("hello loi GET");
+            Logger.getLogger(MusicManual2Resource.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return prod;
@@ -65,25 +64,35 @@ public class MusicManual2Resource {
     @PermitAll
     @Path("{id}")
     @DELETE
-    public Response remove(@PathParam("id") long id) throws SQLException {
-        System.out.println("hello DELETE");
-        Statement st = conn.createStatement();
-        st.executeUpdate("DELETE FROM musicmanual2 where id = " + id);
-        st.close();
+    public Response remove(@PathParam("id") long id) {
+        try {
+            System.out.println("hello DELETE manual 2");
+            Statement st = conn.createStatement();
+            st.executeUpdate("DELETE FROM musicmanual2 where id = " + id);
+            st.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(MusicManual2Resource.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return Response.noContent().build();
     }
 
     @PermitAll
     @Path("{id}")
     @PUT
-    public Response doPut(@PathParam("id") long id, MusicManual2Model entity) throws SQLException {
-        System.out.println("helloput");
-        Statement st = conn.createStatement();
-        String sqlvalue = "UPDATE musicmanual2 SET"
-                + " name = '" + entity.getName() + "'"
-                + " WHERE id = '" + id + "'";
-        st.executeUpdate(sqlvalue);
-        st.close();
+    public Response doPut(@PathParam("id") long id, MusicManual2Model entity) {
+        try {
+            System.out.println("helloput");
+            Statement st = conn.createStatement();
+            String sqlvalue = "UPDATE musicmanual2 SET"
+                    + " name = '" + entity.getName() + "'"
+                    + " WHERE id = '" + id + "'";
+            st.executeUpdate(sqlvalue);
+            st.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(MusicManual2Resource.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 
@@ -98,7 +107,7 @@ public class MusicManual2Resource {
             st.executeUpdate("INSERT INTO musicmanual2 " + sqlvalue);
             st.close();
         } catch (SQLException ex) {
-
+            Logger.getLogger(MusicManual2Resource.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

@@ -7,14 +7,10 @@ package org.energy;
 
 import java.io.File;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javazoom.jl.converter.*;
-import static org.energy.PlayMusicManual1.clip;
-import static org.energy.PlayMusicManual1.currentSong;
 
 /**
  *
@@ -29,7 +25,6 @@ public class PlayMusicManual2 implements Runnable {
     @Override
     public void run() {
         try {
-
             Connection conn = mysql.getConn();
             Statement st = conn.createStatement();
             ResultSet rs = null;
