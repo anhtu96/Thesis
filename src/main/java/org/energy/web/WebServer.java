@@ -60,6 +60,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.net.InetSocketAddress;
 import org.energy.api.resource.FlameHomeResource;
+import org.energy.api.resource.FlameResource;
 import org.energy.api.resource.FloorResource;
 import org.energy.api.resource.LightbulbAutoResource;
 import org.energy.api.resource.LightbulbHomeResource;
@@ -192,7 +193,8 @@ public class WebServer {
                 LightbulbHomeResource.class,
                 LightbulbAutoResource.class,
                 FloorResource.class,
-                FlameHomeResource.class);
+                FlameHomeResource.class,
+                FlameResource.class);
         servletHandler.addServlet(new ServletHolder(new ServletContainer(resourceConfig)), "/*");
 
         handlers.addHandler(servletHandler);

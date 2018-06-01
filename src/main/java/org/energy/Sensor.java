@@ -115,7 +115,7 @@ public class Sensor implements Runnable {
                             if (data[3] == 0) {
                                 cntStateFlame = 1;
                                 if (cntTimeFlame == 0) {
-                                    SendMail.send();
+                                    SendMail.send(devicename);
                                     Date date = new Date();
                                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                                     String sendtime = sdf.format(date);

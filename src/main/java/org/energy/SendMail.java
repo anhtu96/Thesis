@@ -23,7 +23,7 @@ import javax.mail.internet.MimeMessage;
  */
 public class SendMail {
 
-    public static void send() {
+    public static void send(String devicename) {
         final String username = "songoku3496@gmail.com";
         final String password = "knightKingdom";
 
@@ -47,8 +47,8 @@ public class SendMail {
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse("tungo.ee.96@gmail.com"));
             message.setSubject("Warning!");
-            message.setText("Dear Mail Crawler,"
-                    + "\n\n No spam to my email, please!");
+            message.setText("Attention!"
+                    + "\n\n Your system is in danger!. Danger signal is sent from '" + devicename + "'.");
 
             Transport.send(message);
 
