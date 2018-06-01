@@ -37,7 +37,7 @@ Ext.define('myApp.view.StatSheetFlame', {
         }]
     }, {
         xtype: 'toolbar',
-        label: 'Danger signals report'
+        title: 'Danger signals report'
     }, {
         xtype: 'grid',
         columns: [{

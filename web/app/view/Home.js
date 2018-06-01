@@ -205,7 +205,7 @@ Ext.define('myApp.view.Home', {
             }
         }, {
             xtype: 'toolbar',
-            label: 'E-mail accounts',
+            title: 'E-mail accounts',
             style: 'margin-top:10px',
             items: [{
                 iconCls: 'x-fa fa-cog',
