@@ -210,6 +210,9 @@ Ext.define('myApp.view.Home', {
                 }
 
             }
+        }, {
+            xtype: 'button',
+            text: 'Set up E-mail'
         }]
     }, {
         xtype: 'panel',
