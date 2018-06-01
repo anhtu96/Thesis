@@ -2,7 +2,7 @@ Ext.define('myApp.view.StatSheetFlame', {
     extend: 'Ext.Sheet',
     requires: ['myApp.controller.StatController'],
     controller: 'stat',
-    layout: 'fit',
+    layout: 'vbox',
     height: '80%',
     width: '80%',
     items: [{
