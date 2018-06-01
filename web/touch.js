@@ -24,8 +24,6 @@ Ext.application({
             data = Ext.decode(event.data);
 
 
-
-
             if (data.tempsensor) {
                 var id = 1;
                 array = data.tempsensor;
