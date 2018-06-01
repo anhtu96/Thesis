@@ -110,12 +110,11 @@ public class Sensor implements Runnable {
                     }
                     if (data[0] == sendFlame[0] && data[1] == sendFlame[1]) {
                         if ((data[6] == (byte) (checksum.getResult(data, data.length - 2) & 0x00ff)) && (data[7] == (byte) ((checksum.getResult(data, data.length - 2) & 0xff00) >> 8))) {
-                            System.out.println("flame 3" + data[3]);
                             SyncFlameHome.update((int) data[2], "online", "green", (int) data[3]);
                             cntFlame++;
                             if (data[3] == 0) {
                                 cntStateFlame = 1;
-                                if (cntTimeFlame == 2) {
+                                if (cntTimeFlame == 0) {
                                     SendMail.send();
                                     Date date = new Date();
                                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -139,7 +138,7 @@ public class Sensor implements Runnable {
                 if (cntTimeTemp > 3) {
                     cntTimeTemp = 0;
                 }
-                if (cntTimeFlame > 2) {
+                if (cntTimeFlame > 3) {
                     cntTimeFlame = 0;
                 }
                 rs = st.executeQuery("select * from tempsensorhome");
@@ -223,19 +222,16 @@ public class Sensor implements Runnable {
                         cntFlame = 0;
                         Thread.sleep(500);
                     }
-                    if (cntStateFlame == 0) {
-                        prevStateFlame = 0;
-                    }
+                    prevStateFlame = cntStateFlame;
                     if (prevStateFlame == 1) {
                         cntTimeFlame++;
                     } else {
                         cntTimeFlame = 0;
                     }
                     GlobalVars.setCheckTemp(1);
+                    System.out.println("cnt time flame " + cntTimeFlame);
                 }
                 rs.close();
-                Thread.sleep(300);
-
             } catch (IllegalStateException ex) {
                 ex.printStackTrace();
             } catch (InterruptedException ex) {
