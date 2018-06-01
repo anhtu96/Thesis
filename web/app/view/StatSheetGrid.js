@@ -44,14 +44,17 @@ Ext.define('myApp.view.StatSheetGrid', {
             flex: 1.5,
         }, {
             text: 'Time',
+            align: 'center',
             dataIndex: 'sendtime',
             flex: 1.5
         }, {
             text: 'Temperature',
+            align: 'center',
             dataIndex: 'temp',
             flex: 1
         }, {
             text: 'Humidity',
+            align: 'right',
             dataIndex: 'humid',
             flex: 1
         }],

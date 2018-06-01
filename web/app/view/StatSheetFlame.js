@@ -47,6 +47,7 @@ Ext.define('myApp.view.StatSheetFlame', {
             flex: 1.5,
         }, {
             text: 'Time',
+            align: 'right',
             dataIndex: 'sendtime',
             flex: 1.5
         }]
