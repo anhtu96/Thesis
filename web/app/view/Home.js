@@ -196,13 +196,6 @@ Ext.define('myApp.view.Home', {
                                 var store = Ext.getStore('FlameHome');
                                 store.remove(record);
                                 store.sync();
-                                // var storecontrol = Ext.getStore('TempControl');
-                                // storecontrol.each(function(record, id) {
-                                //     if (record.get('deviceid') == devicerecord.get('deviceid')) {
-                                //         storecontrol.remove(record);
-                                //         storecontrol.sync();
-                                //     }
-                                // });
                             }
                         })
                     }
@@ -211,8 +204,13 @@ Ext.define('myApp.view.Home', {
 
             }
         }, {
-            xtype: 'button',
-            text: 'Set up E-mail'
+            xtype: 'toolbar',
+            label: 'E-mail accounts',
+            style: 'margin-top:10px',
+            items: [{
+                iconCls: 'x-fa fa-cog',
+                // handler: 'flameAdd'
+            }]
         }]
     }, {
         xtype: 'panel',
