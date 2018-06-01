@@ -28,6 +28,7 @@ Ext.define('myApp.view.Home', {
             title: 'Sensors',
             style: 'margin-top:10px',
             items: [{
+                text: 'add',
                 iconCls: 'x-fa fa-plus',
                 handler: 'tempSensorAdd'
             }]
@@ -77,6 +78,7 @@ Ext.define('myApp.view.Home', {
             title: 'Controlling devices',
             style: 'margin-top:5px',
             items: [{
+                text: 'add',
                 iconCls: 'x-fa fa-plus',
                 handler: 'tempControlAdd'
             }]
@@ -122,6 +124,7 @@ Ext.define('myApp.view.Home', {
             title: 'Light bulbs',
             style: 'margin-top:10px',
             items: [{
+                text: 'add',
                 iconCls: 'x-fa fa-plus',
                 handler: 'lightbulbAdd'
             }]
@@ -174,6 +177,7 @@ Ext.define('myApp.view.Home', {
             title: 'Sensors',
             style: 'margin-top:10px',
             items: [{
+                text: 'add',
                 iconCls: 'x-fa fa-plus',
                 handler: 'flameAdd'
             }]
@@ -208,6 +212,7 @@ Ext.define('myApp.view.Home', {
             title: 'E-mail accounts',
             style: 'margin-top:10px',
             items: [{
+                text: 'configure',
                 iconCls: 'x-fa fa-cog',
                 // handler: 'flameAdd'
             }]
