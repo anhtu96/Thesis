@@ -86,7 +86,7 @@ Ext.define('myApp.view.Home', {
             xtype: 'list',
             id: 'tempControlList',
             // height: 100,
-            style: 'margin-bottom:10px',
+            style: 'margin-bottom:15px',
             store: 'TempControlHome',
             itemTpl: new Ext.XTemplate(
                 '<b>{devicename}</b>',
@@ -131,7 +131,7 @@ Ext.define('myApp.view.Home', {
         }, {
             xtype: 'list',
             id: 'lightbulbHomeList',
-            // height: 100,
+            style: 'margin-bottom:15px',
             store: 'LightbulbHome',
             itemTpl: new Ext.XTemplate(
                 '<b>{devicename}</b>',
@@ -184,7 +184,7 @@ Ext.define('myApp.view.Home', {
         }, {
             xtype: 'list',
             id: 'flameHomeList',
-            // height: 100,
+            style: 'margin-bottom:15px',
             store: 'FlameHome',
             itemTpl: new Ext.XTemplate(
                 '<b>{devicename}</b>',
