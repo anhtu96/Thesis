@@ -29,7 +29,6 @@ Ext.define('myApp.view.Home', {
             style: 'margin-top:10px',
             items: [{
                 text: 'add',
-                ui: 'round',
                 iconCls: 'x-fa fa-plus',
                 handler: 'tempSensorAdd'
             }]
