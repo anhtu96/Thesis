@@ -48,6 +48,8 @@ public class Sensor implements Runnable {
     private long duration = 0;
     private int cntTimeTemp = 0;
     private int cntTimeFlame = 0;
+    private int prevStateFlame = 0;
+    private int cntStateFlame = 0;
     public static int waitFlag = 0;
     ResultSet rs = null;
     ResultSet rs2 = null;
@@ -76,15 +78,7 @@ public class Sensor implements Runnable {
                             if (data[2] == sendTemp[2]) {
                                 sensor[0] = (double) data[4] + (double) data[5] / 10;
                                 sensor[1] = (double) data[6] + (double) data[7] / 10;
-//                                    int toInt = (data[4] & 0xFF) | ((data[5] & 0xFF) << 8) | ((data[6] & 0xFF) << 16) | ((data[7] & 0xFF) << 24);
-//                                    double toFloat = Float.intBitsToFloat(toInt);
-//                                    sensor[index] = toFloat;
-//                                    System.out.println("double  " + toFloat);
                             }
-//                                else {
-//                                    sensor[index] = 0;
-//                                }
-//                                if (index == sendTemp[5] - 1) {
                             if (data[2] == sendTemp[2]) {
                                 while (rsDisplay.next()) {
                                     if (rsDisplay.getInt("deviceid") == (int) data[2]) {
@@ -115,17 +109,19 @@ public class Sensor implements Runnable {
                         }
                     }
                     if (data[0] == sendFlame[0] && data[1] == sendFlame[1]) {
-
                         if ((data[6] == (byte) (checksum.getResult(data, data.length - 2) & 0x00ff)) && (data[7] == (byte) ((checksum.getResult(data, data.length - 2) & 0xff00) >> 8))) {
                             System.out.println("flame 3" + data[3]);
                             SyncFlameHome.update((int) data[2], "online", "green", (int) data[3]);
                             cntFlame++;
-                            if (cntTimeFlame == 0 && data[3] == 0) {
-                                SendMail.send();
-                                Date date = new Date();
-                                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-                                String sendtime = sdf.format(date);
-                                SyncFlame.insert((int) data[2], devicename, sendtime);
+                            if (data[3] == 0) {
+                                cntStateFlame = 1;
+                                if (cntTimeFlame == 2) {
+                                    SendMail.send();
+                                    Date date = new Date();
+                                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                                    String sendtime = sdf.format(date);
+                                    SyncFlame.insert((int) data[2], devicename, sendtime);
+                                }
                             }
                         }
                     }
@@ -143,7 +139,7 @@ public class Sensor implements Runnable {
                 if (cntTimeTemp > 3) {
                     cntTimeTemp = 0;
                 }
-                if (cntTimeFlame > 3) {
+                if (cntTimeFlame > 2) {
                     cntTimeFlame = 0;
                 }
                 rs = st.executeQuery("select * from tempsensorhome");
@@ -186,13 +182,7 @@ public class Sensor implements Runnable {
                             }
                             rs2.close();
                             if (existed > 0) {
-//                                stDisplay.executeUpdate("delete from tempdisplay where deviceid like " + sendTemp[2]);
                                 SyncTempDisplay.delete((int) sendTemp[2]);
-
-//                                stSensorHome.executeUpdate("update tempsensorhome set "
-//                                        + " state = " + "'offline',"
-//                                        + " color = " + "'red'"
-//                                        + " where deviceid = " + rs.getInt("deviceid"));
                                 System.out.println("delete from tempdisplay where deviceid like " + sendTemp[2]);
                             }
                             SyncTempSensorHome.update((int) sendTemp[2], "offline", "red");
@@ -200,8 +190,9 @@ public class Sensor implements Runnable {
                         cntTemp = 0;
                         Thread.sleep(500);
                     }
-//                        waitFlag = 1;
                     cntTimeTemp++;
+
+                    cntStateFlame = 0;
                     rs = st.executeQuery("select * from flamehome");
                     while (rs.next()) {
                         sendFlame[2] = (byte) rs.getInt("deviceid");
@@ -232,11 +223,18 @@ public class Sensor implements Runnable {
                         cntFlame = 0;
                         Thread.sleep(500);
                     }
-                    cntTimeFlame++;
+                    if (cntStateFlame == 0) {
+                        prevStateFlame = 0;
+                    }
+                    if (prevStateFlame == 1) {
+                        cntTimeFlame++;
+                    } else {
+                        cntTimeFlame = 0;
+                    }
                     GlobalVars.setCheckTemp(1);
                 }
                 rs.close();
-                Thread.sleep(500);
+                Thread.sleep(300);
 
             } catch (IllegalStateException ex) {
                 ex.printStackTrace();
