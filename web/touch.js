@@ -45,6 +45,23 @@ Ext.application({
                 store.add(record);
                 store.sync();
             }
+            if (data.flame) {
+                var id = 1;
+                array = data.flame;
+                store = Ext.getStore('Flame');
+                var record = Ext.create('myApp.model.Flame');
+                if (store.getCount() > 0) {
+                    id = store.getAt(store.getCount() - 1).get('id') + 1
+                }
+                record.set({
+                    id: id,
+                    deviceid: array[0].deviceid,
+                    devicename: array[0].devicename,
+                    sendtime: array[0].sendtime,
+                });
+                store.add(record);
+                store.sync();
+            }
 
             if (data.tempsensorhome) {
                 array = data.tempsensorhome;

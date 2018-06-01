@@ -20,7 +20,8 @@ Ext.define('myApp.Touch', {
         'LightbulbHome',
         'LightbulbAuto',
         'Floor',
-        'FlameHome'
+        'FlameHome',
+        'Flame'
     ],
     stores: [
         'UserStore',
@@ -41,7 +42,8 @@ Ext.define('myApp.Touch', {
         'LightbulbHome',
         'LightbulbAuto',
         'Floor',
-        'FlameHome'
+        'FlameHome',
+        'Flame'
     ],
     controllers: ['mRoot'],
     views: ['Main',

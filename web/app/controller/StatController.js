@@ -41,16 +41,16 @@ Ext.define('myApp.controller.StatController', {
         store.sync();
     },
     onSelectFlame: function(selectfield, newval) {
-        // var store = Ext.getStore('Flame');
-        // store.filter('deviceid', newval.get('deviceid'));
-        // selectfield.up('toolbar').up('sheet').down('grid').setStore(store);
+        var store = Ext.getStore('Flame');
+        store.filter('deviceid', newval.get('deviceid'));
+        selectfield.up('toolbar').up('sheet').down('grid').setStore(store);
     },
     onResetFlame: function(button) {
-        // var store = Ext.getStore('TempSensor'),
-        //     selectfield = button.up('toolbar').down('selectfield');
-        // store.filter('deviceid', selectfield.getValue());
-        // store.removeAll();
-        // store.sync();
+        var store = Ext.getStore('Flame'),
+            selectfield = button.up('toolbar').down('selectfield');
+        store.filter('deviceid', selectfield.getValue());
+        store.removeAll();
+        store.sync();
     },
     quantityTap: function(list) {
         list.setDisableSelection(true);
