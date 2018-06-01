@@ -40,6 +40,7 @@ Ext.define('myApp.view.StatSheetFlame', {
         title: 'Danger signals report'
     }, {
         xtype: 'grid',
+        height: '100%',
         columns: [{
             text: 'Name',
             dataIndex: 'devicename',
