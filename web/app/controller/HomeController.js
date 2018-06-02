@@ -476,6 +476,18 @@ Ext.define('myApp.controller.HomeController', {
         Ext.getCmp('homeView').add(msgbox);
         msgbox.show();
     },
+    mailAdd: function(button) {
+        var msgbox = Ext.create('myApp.view.Home_editMail'),
+            store = Ext.getStore('Email');
+        Ext.getCmp('homeView').add(msgbox);
+        if (store.getCount() == 0) {
+            msgbox.setTitle('Add account');
+        } else {
+            msgbox.setTitle('Edit account');
+            msgbox.down('formpanel').setRecord(store.getAt(0));
+        }
+        msgbox.show();
+    },
 
     /*
      * tap device list
@@ -710,4 +722,34 @@ Ext.define('myApp.controller.HomeController', {
             Ext.getCmp('flameAddDialog').hide();
         }
     },
+    saveMail: function(button) {
+        var store = Ext.getStore('Email'),
+            record = Ext.create('myApp.model.Email'),
+            check = 0,
+            id = 1,
+            check = 0,
+            sender = Ext.getCmp('editMailDialog').down('formpanel').getFields('sender').getValue(),
+            password = Ext.getCmp('editMailDialog').down('formpanel').getFields('password').getValue(),
+            recipient = Ext.getCmp('editMailDialog').down('formpanel').getFields('recipient').getValue();
+        if (sender == '' || sender == null || password == '' || password == null || recipient == '' || recipient == null) {
+            Ext.Msg.show({
+                title: 'Warning',
+                message: 'Please provide all information!'
+            });
+        } else {
+            if (store.getCount() == 1) {
+                record = store.getAt(0);
+                id = record.get('id');
+            }
+            record.set({
+                id: id,
+                sender: Ext.getCmp('editMailDialog').down('formpanel').getFields('sender').getValue(),
+                password: Ext.getCmp('editMailDialog').down('formpanel').getFields('password').getValue(),
+                recipient: Ext.getCmp('editMailDialog').down('formpanel').getFields('recipient').getValue()
+            });
+            store.add(record);
+            store.sync();
+            Ext.getCmp('editMailDialog').hide();
+        }
+    }
 })

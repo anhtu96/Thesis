@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 2018-06-01 16:41:19  INFO: Operating system name: Linux version: 4.4.50-v7+ architecture: arm
 2018-06-01 16:41:19  INFO: Java runtime name: Java HotSpot(TM) Client VM vendor: Oracle Corporation version: 25.65-b01
 2018-06-01 16:41:19  INFO: Memory limit heap: 224mb non-heap: 0mb
@@ -97,58 +96,3 @@
 2018-06-01 17:39:01  INFO: Version: null
 2018-06-01 17:39:02  INFO: Starting server...
 2018-06-01 17:59:27  INFO: Shutting down server...
-2018-06-01 19:21:50  INFO: Operating system name: Linux version: 4.4.50-v7+ architecture: arm
-2018-06-01 19:21:50  INFO: Java runtime name: Java HotSpot(TM) Client VM vendor: Oracle Corporation version: 25.65-b01
-2018-06-01 19:21:50  INFO: Memory limit heap: 224mb non-heap: 0mb
-2018-06-01 19:21:50  INFO: Character encoding: UTF-8 charset: UTF-8
-2018-06-01 19:21:50  INFO: Version: null
-2018-06-01 19:21:53  INFO: Starting server...
-2018-06-01 19:37:41  INFO: Shutting down server...
-2018-06-01 19:39:11  INFO: Operating system name: Linux version: 4.4.50-v7+ architecture: arm
-2018-06-01 19:39:11  INFO: Java runtime name: Java HotSpot(TM) Client VM vendor: Oracle Corporation version: 25.65-b01
-2018-06-01 19:39:11  INFO: Memory limit heap: 224mb non-heap: 0mb
-2018-06-01 19:39:11  INFO: Character encoding: UTF-8 charset: UTF-8
-2018-06-01 19:39:11  INFO: Version: null
-2018-06-01 19:39:12  INFO: Starting server...
-2018-06-01 19:58:31  INFO: Shutting down server...
-=======
-2018-06-02 08:41:03  INFO: Operating system name: Windows 10 version: 10.0 architecture: amd64
-2018-06-02 08:41:03  INFO: Java runtime name: Java HotSpot(TM) 64-Bit Server VM vendor: Oracle Corporation version: 25.162-b12
-2018-06-02 08:41:03  INFO: Memory limit heap: 1810mb non-heap: 0mb
-2018-06-02 08:41:03  INFO: Character encoding: Cp1252 charset: windows-1252
-2018-06-02 08:41:03  INFO: Version: null
-2018-06-02 08:41:03  INFO: Starting server...
-2018-06-02 09:18:41  INFO: Operating system name: Windows 10 version: 10.0 architecture: amd64
-2018-06-02 09:18:41  INFO: Java runtime name: Java HotSpot(TM) 64-Bit Server VM vendor: Oracle Corporation version: 25.162-b12
-2018-06-02 09:18:41  INFO: Memory limit heap: 1810mb non-heap: 0mb
-2018-06-02 09:18:41  INFO: Character encoding: Cp1252 charset: windows-1252
-2018-06-02 09:18:41  INFO: Version: null
-2018-06-02 09:18:41  INFO: Starting server...
-2018-06-02 09:26:09  INFO: Operating system name: Windows 10 version: 10.0 architecture: amd64
-2018-06-02 09:26:09  INFO: Java runtime name: Java HotSpot(TM) 64-Bit Server VM vendor: Oracle Corporation version: 25.162-b12
-2018-06-02 09:26:09  INFO: Memory limit heap: 1810mb non-heap: 0mb
-2018-06-02 09:26:09  INFO: Character encoding: Cp1252 charset: windows-1252
-2018-06-02 09:26:09  INFO: Version: null
-2018-06-02 09:26:10  INFO: Starting server...
->>>>>>> f05d7861eee51112e57b1b8ece92a45ccb4a2178
-2018-06-02 09:59:59  INFO: Operating system name: Linux version: 4.4.50-v7+ architecture: arm
-2018-06-02 09:59:59  INFO: Java runtime name: Java HotSpot(TM) Client VM vendor: Oracle Corporation version: 25.65-b01
-2018-06-02 09:59:59  INFO: Memory limit heap: 224mb non-heap: 0mb
-2018-06-02 09:59:59  INFO: Character encoding: UTF-8 charset: UTF-8
-2018-06-02 09:59:59  INFO: Version: null
-2018-06-02 10:00:01  INFO: Starting server...
-2018-06-02 10:00:38  INFO: Shutting down server...
-2018-06-02 10:02:14  INFO: Operating system name: Linux version: 4.4.50-v7+ architecture: arm
-2018-06-02 10:02:14  INFO: Java runtime name: Java HotSpot(TM) Client VM vendor: Oracle Corporation version: 25.65-b01
-2018-06-02 10:02:14  INFO: Memory limit heap: 224mb non-heap: 0mb
-2018-06-02 10:02:14  INFO: Character encoding: UTF-8 charset: UTF-8
-2018-06-02 10:02:14  INFO: Version: null
-2018-06-02 10:02:15  INFO: Starting server...
-2018-06-02 10:04:10  INFO: Shutting down server...
-2018-06-02 10:05:44  INFO: Operating system name: Linux version: 4.4.50-v7+ architecture: arm
-2018-06-02 10:05:44  INFO: Java runtime name: Java HotSpot(TM) Client VM vendor: Oracle Corporation version: 25.65-b01
-2018-06-02 10:05:44  INFO: Memory limit heap: 224mb non-heap: 0mb
-2018-06-02 10:05:44  INFO: Character encoding: UTF-8 charset: UTF-8
-2018-06-02 10:05:44  INFO: Version: null
-2018-06-02 10:05:45  INFO: Starting server...
-2018-06-02 10:07:10  INFO: Shutting down server...

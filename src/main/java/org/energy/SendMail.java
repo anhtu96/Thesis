@@ -23,9 +23,9 @@ import javax.mail.internet.MimeMessage;
  */
 public class SendMail {
 
-    public static void send(String devicename) {
-        final String username = "songoku3496@gmail.com";
-        final String password = "knightKingdom";
+    public static void send(String username, String password, String recipient, String devicename) {
+//        final String username = "songoku3496@gmail.com";
+//        final String password = "knightKingdom";
 
         Properties props = new Properties();
         props.put("mail.smtp.starttls.enable", "true");
@@ -48,7 +48,7 @@ public class SendMail {
                     InternetAddress.parse("tungo.ee.96@gmail.com"));
             message.setSubject("Warning!");
             message.setText("Attention!"
-                    + "\n\n Your system is in danger!. Danger signal is sent from '" + devicename + "'.");
+                    + "\n\n Your system is in danger! Danger signal is sent from '" + devicename + "'.");
 
             Transport.send(message);
 
