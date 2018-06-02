@@ -7,9 +7,7 @@ Ext.define('myApp.view.Home_tempControlAddDialog', {
     scrollable: true,
     items: [{
         xtype: 'formpanel',
-        scrollable: false,
-        height: 200,
-        width: 700,
+        scrollable: true,
         items: [{
             xtype: 'textfield',
             name: 'deviceid',

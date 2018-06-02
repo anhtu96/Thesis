@@ -214,7 +214,19 @@ Ext.define('myApp.view.Home', {
             items: [{
                 text: 'configure',
                 iconCls: 'x-fa fa-cog',
-                // handler: 'flameAdd'
+                handler: 'mailAdd'
+            }, {
+                text: 'reset',
+                iconCls: 'x-fa fa-retweet',
+                ui: 'decline',
+                handler: function(button) {
+                    Ext.getStore('Email').removeAll();
+                    Ext.getStore('Email').sync();
+                    Ext.Msg.show({
+                        title: 'Reset accounts',
+                        message: 'All accounts have been removed!'
+                    });
+                }
             }]
         }]
     }, {

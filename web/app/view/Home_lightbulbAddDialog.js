@@ -8,9 +8,7 @@ Ext.define('myApp.view.Home_lightbulbAddDialog', {
     title: 'Add a lightbulb',
     items: [{
         xtype: 'formpanel',
-        height: 200,
-        width: 700,
-        scrollable: false,
+        scrollable: true,
         items: [{
             xtype: 'textfield',
             name: 'deviceid',

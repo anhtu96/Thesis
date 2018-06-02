@@ -59,6 +59,7 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.InetSocketAddress;
+import org.energy.api.resource.EmailResource;
 import org.energy.api.resource.FlameHomeResource;
 import org.energy.api.resource.FlameResource;
 import org.energy.api.resource.FloorResource;
@@ -194,7 +195,8 @@ public class WebServer {
                 LightbulbAutoResource.class,
                 FloorResource.class,
                 FlameHomeResource.class,
-                FlameResource.class);
+                FlameResource.class,
+                EmailResource.class);
         servletHandler.addServlet(new ServletHolder(new ServletContainer(resourceConfig)), "/*");
 
         handlers.addHandler(servletHandler);

@@ -30,6 +30,7 @@ public class Sensor implements Runnable {
     private Statement st = null;
     private Statement stDisplay = null;
     private Statement stDisplay2 = null;
+    private Statement stMail = null;
     private final byte[] sendTemp = {1, 0, 0, 0, 0, 2};
     private final byte[] sendFlame = {0, 0, 0, 0, 0, 1};
     // id = 1, sensor=0/control=1, "000" not used, require 2 sensors (temp + humid)
@@ -53,6 +54,7 @@ public class Sensor implements Runnable {
     public static int waitFlag = 0;
     ResultSet rs = null;
     ResultSet rs2 = null;
+    private ResultSet rsMail = null;
 
     @Override
     public void run() {
@@ -61,6 +63,7 @@ public class Sensor implements Runnable {
             stDisplay = conn.createStatement();
             stDisplay2 = conn.createStatement();
             st = conn.createStatement();
+            stMail = conn.createStatement();
         } catch (SQLException ex) {
             Logger.getLogger(Sensor.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -115,7 +118,10 @@ public class Sensor implements Runnable {
                             if (data[3] == 0) {
                                 cntStateFlame = 1;
                                 if (cntTimeFlame == 0) {
-                                    SendMail.send(devicename);
+                                    rsMail = stMail.executeQuery("select * from email");
+                                    while (rsMail.next()) {
+                                        SendMail.send(rs.getString("sender"), rs.getString("password"), rs.getString("recipient"), devicename);
+                                    }
                                     Date date = new Date();
                                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                                     String sendtime = sdf.format(date);

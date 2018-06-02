@@ -23,9 +23,9 @@ import javax.mail.internet.MimeMessage;
  */
 public class SendMail {
 
-    public static void send(String devicename) {
-        final String username = "songoku3496@gmail.com";
-        final String password = "knightKingdom";
+    public static void send(String username, String password, String recipient, String devicename) {
+//        final String username = "songoku3496@gmail.com";
+//        final String password = "knightKingdom";
 
         Properties props = new Properties();
         props.put("mail.smtp.starttls.enable", "true");
