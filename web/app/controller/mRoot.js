@@ -61,6 +61,6 @@ Ext.define('myApp.controller.mRoot', {
             interval: 10000
         });
         task.start();
-    };
+    }
 
 })
