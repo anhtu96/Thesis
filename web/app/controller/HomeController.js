@@ -234,7 +234,7 @@ Ext.define('myApp.controller.HomeController', {
                                 Ext.getCmp('tip').destroy();
                             }
                             if (store.getAt(0).get('onlinestatus') == 'online') {
-                                if (store.getAt(0).get('status') == 0) {
+                                if (store.getAt(0).get('state') == 0) {
                                     status = 'in danger'
                                 } else status = 'online'
                             }
@@ -431,7 +431,7 @@ Ext.define('myApp.controller.HomeController', {
                                         Ext.getCmp('tip').destroy();
                                     }
                                     if (store.getAt(0).get('onlinestatus') == 'online') {
-                                        if (store.getAt(0).get('status') == 0) {
+                                        if (store.getAt(0).get('state') == 0) {
                                             status = 'in danger'
                                         } else status = 'online'
                                     }
