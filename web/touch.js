@@ -25,11 +25,11 @@ Ext.application({
 
 
             if (data.tempsensor) {
-                var id = 1;
+                var id = 1,
+                    selectVal;
                 array = data.tempsensor;
                 store = Ext.getStore('TempSensor');
                 store.clearFilter();
-                console.log(store);
                 var record = Ext.create('myApp.model.TempSensor');
                 if (store.getCount() > 0) {
                     id = store.getAt(store.getCount() - 1).get('id') + 1
@@ -44,13 +44,25 @@ Ext.application({
                 });
                 store.add(record);
                 store.sync();
+                if (Ext.getCmp('statsheetgrid').down('toolbar').down('selectfield')) {
+                    selectVal = Ext.getCmp('statsheetgrid').down('toolbar').down('selectfield').getValue();
+                    store.filter('deviceid', selectVal);
+                }
+                if (Ext.getCmp('statsheettemp').down('toolbar').down('selectfield')) {
+                    selectVal = Ext.getCmp('statsheettemp').down('toolbar').down('selectfield').getValue();
+                    store.filter('deviceid', selectVal);
+                }
+                if (Ext.getCmp('statsheethumid').down('toolbar').down('selectfield')) {
+                    selectVal = Ext.getCmp('statsheethumid').down('toolbar').down('selectfield').getValue();
+                    store.filter('deviceid', selectVal);
+                }
             }
             if (data.flame) {
-                var id = 1;
+                var id = 1,
+                    selectVal;
                 array = data.flame;
                 store = Ext.getStore('Flame');
                 store.clearFilter();
-                console.log(store);
                 var record = Ext.create('myApp.model.Flame');
                 if (store.getCount() > 0) {
                     id = store.getAt(store.getCount() - 1).get('id') + 1
@@ -63,6 +75,10 @@ Ext.application({
                 });
                 store.add(record);
                 store.sync();
+                if (Ext.getCmp('statsheetflame').down('toolbar').down('selectfield')) {
+                    selectVal = Ext.getCmp('statsheetflame').down('toolbar').down('selectfield').getValue();
+                    store.filter('deviceid', selectVal);
+                }
             }
 
             if (data.tempsensorhome) {

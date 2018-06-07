@@ -2,6 +2,7 @@ Ext.define('myApp.view.StatSheetGrid', {
     extend: 'Ext.Sheet',
     requires: ['myApp.controller.StatController'],
     controller: 'stat',
+    id: 'statsheetgrid',
     layout: 'fit',
     height: '80%',
     width: '80%',

@@ -2,6 +2,7 @@ Ext.define('myApp.view.StatSheetHumid', {
     extend: 'Ext.Sheet',
     requires: ['myApp.controller.StatController'],
     controller: 'stat',
+    id: 'statsheethumid',
     layout: 'fit',
     height: '60%',
     width: '80%',
