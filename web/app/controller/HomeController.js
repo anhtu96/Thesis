@@ -227,15 +227,21 @@ Ext.define('myApp.controller.HomeController', {
                         },
                         text: '<b>' + record.get('devicename') + '</b>',
                         handler: function(button) {
-                            var store = Ext.getStore('LightbulbHome');
+                            var store = Ext.getStore('FlameHome'),
+                                status = 'offline';
                             store.filter('deviceid', button.deviceid);
                             if (Ext.getCmp('tip')) {
                                 Ext.getCmp('tip').destroy();
                             }
+                            if (store.getAt(0).get('onlinestatus') == 'online') {
+                                if (store.getAt(0).get('status') == 0) {
+                                    status = 'in danger'
+                                } else status = 'online'
+                            }
                             var tip = new Ext.tip.ToolTip({
                                 id: 'tip',
                                 html: '<b><font size = 3>' + button.getText() + '</font></b>' +
-                                    '<br><b>Status: </b>' + store.getAt(0).get('onlinestatus') +
+                                    '<br><b>Status: </b>' + status +
                                     '<br><b>Floor: </b>' + button.floor
                             });
                             store.clearFilter();
@@ -418,15 +424,21 @@ Ext.define('myApp.controller.HomeController', {
                                 },
                                 text: '<b>' + record.get('devicename') + '</b>',
                                 handler: function(button) {
-                                    var store = Ext.getStore('LightbulbHome');
+                                    var store = Ext.getStore('FlameHome'),
+                                        status = 'offline';
                                     store.filter('deviceid', button.deviceid);
                                     if (Ext.getCmp('tip')) {
                                         Ext.getCmp('tip').destroy();
                                     }
+                                    if (store.getAt(0).get('onlinestatus') == 'online') {
+                                        if (store.getAt(0).get('status') == 0) {
+                                            status = 'in danger'
+                                        } else status = 'online'
+                                    }
                                     var tip = new Ext.tip.ToolTip({
                                         id: 'tip',
                                         html: '<b><font size = 3>' + button.getText() + '</font></b>' +
-                                            '<br><b>Status: </b>' + store.getAt(0).get('onlinestatus') +
+                                            '<br><b>Status: </b>' + status +
                                             '<br><b>Floor: </b>' + button.floor
                                     });
                                     store.clearFilter();
