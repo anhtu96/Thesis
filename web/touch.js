@@ -28,6 +28,7 @@ Ext.application({
                 var id = 1;
                 array = data.tempsensor;
                 store = Ext.getStore('TempSensor');
+                store.clearFilter();
                 var record = Ext.create('myApp.model.TempSensor');
                 if (store.getCount() > 0) {
                     id = store.getAt(store.getCount() - 1).get('id') + 1
