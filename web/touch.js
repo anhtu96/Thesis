@@ -44,15 +44,15 @@ Ext.application({
                 });
                 store.add(record);
                 store.sync();
-                if (Ext.getCmp('statsheetgrid').down('toolbar').down('selectfield')) {
+                if (Ext.getCmp('statsheetgrid')) {
                     selectVal = Ext.getCmp('statsheetgrid').down('toolbar').down('selectfield').getValue();
                     store.filter('deviceid', selectVal);
                 }
-                if (Ext.getCmp('statsheettemp').down('toolbar').down('selectfield')) {
+                if (Ext.getCmp('statsheettemp')) {
                     selectVal = Ext.getCmp('statsheettemp').down('toolbar').down('selectfield').getValue();
                     store.filter('deviceid', selectVal);
                 }
-                if (Ext.getCmp('statsheethumid').down('toolbar').down('selectfield')) {
+                if (Ext.getCmp('statsheethumid')) {
                     selectVal = Ext.getCmp('statsheethumid').down('toolbar').down('selectfield').getValue();
                     store.filter('deviceid', selectVal);
                 }
@@ -75,7 +75,7 @@ Ext.application({
                 });
                 store.add(record);
                 store.sync();
-                if (Ext.getCmp('statsheetflame').down('toolbar').down('selectfield')) {
+                if (Ext.getCmp('statsheetflame')) {
                     selectVal = Ext.getCmp('statsheetflame').down('toolbar').down('selectfield').getValue();
                     store.filter('deviceid', selectVal);
                 }
