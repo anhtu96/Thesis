@@ -51,16 +51,16 @@ Ext.define('myApp.controller.mRoot', {
         //     useComponent: true,
         //     defaultType: 'mydataitem'
         // });
-        var runner = new Ext.util.TaskRunner(),
-            task;
+        // var runner = new Ext.util.TaskRunner(),
+        //     task;
 
-        task = runner.newTask({
-            run: function() {
-                Ext.getStore('TempSensor').load();
-            },
-            interval: 10000
-        });
-        task.start();
+        // task = runner.newTask({
+        //     run: function() {
+        //         Ext.getStore('TempSensor').load();
+        //     },
+        //     interval: 10000
+        // });
+        // task.start();
     }
 
 })
