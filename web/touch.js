@@ -47,6 +47,8 @@ Ext.application({
                 var id = 1;
                 array = data.flame;
                 store = Ext.getStore('Flame');
+                store.clearFilter();
+                console.log(store);
                 var record = Ext.create('myApp.model.Flame');
                 if (store.getCount() > 0) {
                     id = store.getAt(store.getCount() - 1).get('id') + 1
