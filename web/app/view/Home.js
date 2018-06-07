@@ -28,7 +28,6 @@ Ext.define('myApp.view.Home', {
             title: 'Sensors',
             style: 'margin-top:10px',
             items: [{
-                text: 'add',
                 iconCls: 'x-fa fa-plus',
                 handler: 'tempSensorAdd'
             }]
@@ -78,7 +77,6 @@ Ext.define('myApp.view.Home', {
             title: 'Controlling devices',
             style: 'margin-top:5px',
             items: [{
-                text: 'add',
                 iconCls: 'x-fa fa-plus',
                 handler: 'tempControlAdd'
             }]
@@ -124,7 +122,6 @@ Ext.define('myApp.view.Home', {
             title: 'Light bulbs',
             style: 'margin-top:10px',
             items: [{
-                text: 'add',
                 iconCls: 'x-fa fa-plus',
                 handler: 'lightbulbAdd'
             }]
@@ -177,7 +174,6 @@ Ext.define('myApp.view.Home', {
             title: 'Sensors',
             style: 'margin-top:10px',
             items: [{
-                text: 'add',
                 iconCls: 'x-fa fa-plus',
                 handler: 'flameAdd'
             }]
@@ -212,11 +208,9 @@ Ext.define('myApp.view.Home', {
             title: 'E-mail accounts',
             style: 'margin-top:10px',
             items: [{
-                text: 'configure',
                 iconCls: 'x-fa fa-cog',
                 handler: 'mailAdd'
             }, {
-                text: 'reset',
                 iconCls: 'x-fa fa-retweet',
                 ui: 'decline',
                 handler: function(button) {
@@ -292,10 +286,11 @@ Ext.define('myApp.view.Home', {
                         xtype: 'titlebar',
                         title: '<font color=white>Legends</font>',
                     }],
-                    html: '<br><img src = "resources/img/tempsensor.png" style="width:20px"> Temperature sensors' +
-                        '<br><img src = "resources/img/tempcontrol.png" style="width:20px"> Temperature controlling devices' +
-                        '<br><img src = "resources/img/light.png" style="width:20px"> Light bulbs' +
-                        '<br><br><img src = "resources/img/offline.png" style="width:20px"> Offline devices'
+                    html: '<br><img src = "resources/img/tempsensor.png" style="width:20px"> Temperature sensor' +
+                        '<br><img src = "resources/img/tempcontrol.png" style="width:20px"> Temperature controlling device' +
+                        '<br><img src = "resources/img/light.png" style="width:20px"> Light bulb' +
+                        '<br><img src = "resources/img/flame.png" style="width:20px"> Flame detector' +
+                        '<br><br><img src = "resources/img/offline.png" style="width:20px"> Offline device'
                 }],
                 height: '80%',
                 flex: 1
