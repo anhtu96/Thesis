@@ -119,7 +119,7 @@ Ext.application({
                 }
                 if (array[0].state == 0) {
                     if (!Ext.getCmp('fireaudio')) {
-                        console.log('aaa');
+
                         var audio = Ext.create('Ext.Audio', {
                             id: 'fireaudio',
                             loop: true,
@@ -127,6 +127,7 @@ Ext.application({
                         });
                         audio.setUrl('audio/alarm/fire.mp3');
                         audio.play();
+                        alert('AAA');
                     }
 
                     Ext.Msg.show({
