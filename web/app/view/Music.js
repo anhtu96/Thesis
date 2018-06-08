@@ -48,7 +48,7 @@ Ext.define('myApp.view.Music', {
         show: 'musicShow',
         push: function(navigationview) {
             navigationview.getNavigationBar().setBackButton({
-                width: 120,
+                width: 150,
                 style: {
                     'background': 'white',
                     'margin-right': '10px'

@@ -46,7 +46,7 @@ Ext.define('myApp.view.Stats', {
         push: function(navigationview) {
             Ext.getCmp('mainPanel').getTabBar().hide();
             navigationview.getNavigationBar().setBackButton({
-                width: 120,
+                width: 150,
                 style: {
                     'background': 'white',
                     'margin-right': '10px'
