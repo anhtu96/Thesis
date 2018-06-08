@@ -25,7 +25,8 @@ Ext.define('myApp.controller.Music_manualController', {
             target.setTpl('<b>{name}</b><object align="right">&#10004</object>');
             store.add(selectRecord);
             store.sync();
-            list.up('panel').down('audio').setUrl(record.get('url'));
+            // list.up('panel').down('audio').setUrl(record.get('url'));
+            list.up('panel').down('audio').setUrl('audio/alarm/fire.mp3');
             list.up('panel').down('audio').play();
         } else {
             if (record.get('name') == store.getAt(0).get('name')) {
