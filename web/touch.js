@@ -118,18 +118,8 @@ Ext.application({
                     });
                 }
                 if (array[0].state == 0) {
-                    if (!Ext.getCmp('fireaudio')) {
-
-                        var audio = Ext.create('Ext.Audio', {
-                            id: 'fireaudio',
-                            loop: true,
-                            hidden: true
-                        });
-                        audio.setUrl('audio/alarm/fire.mp3');
-                        audio.play();
-                        alert('AAA');
-                    }
-
+                    Ext.getCmp('fireaudio').setUrl('audio/alarm/fire.mp3');
+                    Ext.getCmp('fireaudio').play();
                     Ext.Msg.show({
                         title: 'Something burning',
                         message: 'Danger signal from Sensor',
@@ -138,10 +128,7 @@ Ext.application({
                             text: 'Dismiss',
                         }],
                         fn: function() {
-                            if (Ext.getCmp('fireaudio')) {
-                                Ext.getCmp('fireaudio').stop();
-                                Ext.getCmp('fireaudio').destroy();
-                            }
+                            Ext.getCmp('fireaudio').stop();
                         }
                     });
                 }
