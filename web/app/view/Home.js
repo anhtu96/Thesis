@@ -206,7 +206,8 @@ Ext.define('myApp.view.Home', {
         }, {
             xtype: 'audio',
             id: 'fireaudio',
-            hidden: true
+            hidden: true,
+            loop: true
         }, {
             xtype: 'toolbar',
             title: 'E-mail accounts',
