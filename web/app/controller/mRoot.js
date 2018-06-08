@@ -12,11 +12,11 @@ Ext.define('myApp.controller.mRoot', {
          }*/
         var initNum = 0;
         var editRecord = 2;
-        var audio = Ext.create('Ext.Audio', {
-            url: 'audio/alarm/fire.mp3',
-            id: 'fireaudio',
-            loop: true
-        });
+        // var audio = Ext.create('Ext.Audio', {
+        //     url: 'audio/alarm/fire.mp3',
+        //     id: 'fireaudio',
+        //     loop: true
+        // });
         Ext.Viewport.add([{
             // xtype: 'tabpanel',
             // animation: {
