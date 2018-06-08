@@ -135,8 +135,10 @@ Ext.application({
                             text: 'Dismiss',
                         }],
                         fn: function() {
-                            Ext.getCmp('fireaudio').stop();
-                            Ext.getCmp('fireaudio').destroy();
+                            if (Ext.getCmp('fireaudio')) {
+                                Ext.getCmp('fireaudio').stop();
+                                Ext.getCmp('fireaudio').destroy();
+                            }
                         }
                     });
                 }
