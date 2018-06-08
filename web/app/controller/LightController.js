@@ -12,7 +12,7 @@ Ext.define('myApp.controller.LightController', {
     pushLight: function(navigationview) {
         console.log(Ext.getCmp('lightpush').down('toolbar').down('togglefield'));
         navigationview.getNavigationBar().setBackButton({
-            width: 100,
+            width: 120,
             style: {
                 'background': 'white',
                 'margin-right': '10px'
