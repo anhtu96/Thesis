@@ -13,8 +13,7 @@ Ext.define('myApp.controller.mRoot', {
         var initNum = 0;
         var editRecord = 2;
         var audio = Ext.create('Ext.Audio', {
-            // url: 'audio/alarm/fire.mp3',
-            url: 'audio/Sound 2.mp3',
+            url: 'audio/alarm/fire.mp3',
             id: 'fireaudio',
             loop: true
         });
