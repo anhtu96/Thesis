@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2018-06-07 16:43:40  INFO: Operating system name: Linux version: 4.4.50-v7+ architecture: arm
 2018-06-07 16:43:40  INFO: Java runtime name: Java HotSpot(TM) Client VM vendor: Oracle Corporation version: 25.65-b01
 2018-06-07 16:43:40  INFO: Memory limit heap: 224mb non-heap: 0mb
@@ -19,3 +20,23 @@
 2018-06-07 17:48:42  INFO: Version: null
 2018-06-07 17:48:44  INFO: Starting server...
 2018-06-07 18:04:20  INFO: Shutting down server...
+=======
+2018-06-08 16:13:29  INFO: Operating system name: Windows 10 version: 10.0 architecture: amd64
+2018-06-08 16:13:29  INFO: Java runtime name: Java HotSpot(TM) 64-Bit Server VM vendor: Oracle Corporation version: 25.162-b12
+2018-06-08 16:13:29  INFO: Memory limit heap: 1810mb non-heap: 0mb
+2018-06-08 16:13:29  INFO: Character encoding: Cp1252 charset: windows-1252
+2018-06-08 16:13:29  INFO: Version: null
+2018-06-08 16:13:29  INFO: Starting server...
+2018-06-08 16:14:39  INFO: Operating system name: Windows 10 version: 10.0 architecture: amd64
+2018-06-08 16:14:39  INFO: Java runtime name: Java HotSpot(TM) 64-Bit Server VM vendor: Oracle Corporation version: 25.162-b12
+2018-06-08 16:14:39  INFO: Memory limit heap: 1810mb non-heap: 0mb
+2018-06-08 16:14:39  INFO: Character encoding: Cp1252 charset: windows-1252
+2018-06-08 16:14:39  INFO: Version: null
+2018-06-08 16:14:40  INFO: Starting server...
+2018-06-08 16:15:51  INFO: Operating system name: Windows 10 version: 10.0 architecture: amd64
+2018-06-08 16:15:51  INFO: Java runtime name: Java HotSpot(TM) 64-Bit Server VM vendor: Oracle Corporation version: 25.162-b12
+2018-06-08 16:15:51  INFO: Memory limit heap: 1810mb non-heap: 0mb
+2018-06-08 16:15:51  INFO: Character encoding: Cp1252 charset: windows-1252
+2018-06-08 16:15:51  INFO: Version: null
+2018-06-08 16:15:51  INFO: Starting server...
+>>>>>>> 51256971c6aaa381b78caf2f6e251c3310b7cc04
