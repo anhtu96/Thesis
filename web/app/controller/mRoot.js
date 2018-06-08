@@ -17,7 +17,6 @@ Ext.define('myApp.controller.mRoot', {
             id: 'fireaudio',
             loop: true
         });
-        audio.play();
         Ext.Viewport.add([{
             // xtype: 'tabpanel',
             // animation: {
