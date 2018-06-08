@@ -119,11 +119,13 @@ Ext.application({
                 }
                 if (array[0].state == 0) {
                     if (!Ext.getCmp('fireaudio')) {
+                        console.log('aaa');
                         var audio = Ext.create('Ext.Audio', {
-                            url: 'audio/alarm/fire.mp3',
                             id: 'fireaudio',
-                            loop: true
+                            loop: true,
+                            hidden: true
                         });
+                        audio.setUrl('audio/alarm/fire.mp3');
                         audio.play();
                     }
 
