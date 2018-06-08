@@ -118,7 +118,7 @@ Ext.application({
                     });
                 }
                 if (array[0].state == 0) {
-                    if (Ext.getCmp('fireaudio')) {
+                    if (!Ext.getCmp('fireaudio')) {
                         var audio = Ext.create('Ext.Audio', {
                             url: 'audio/alarm/fire.mp3',
                             id: 'fireaudio',
