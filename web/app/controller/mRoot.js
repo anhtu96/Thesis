@@ -17,7 +17,7 @@ Ext.define('myApp.controller.mRoot', {
         //     id: 'fireaudio',
         //     loop: true
         // });
-        Ext.Viewport.add([{
+        Ext.Viewport.add({
             // xtype: 'tabpanel',
             // animation: {
             //   type: 'slide',
@@ -38,7 +38,7 @@ Ext.define('myApp.controller.mRoot', {
             //   }]
             // }]
             xtype: 'mainView',
-        }, audio]);
+        });
         // Ext.Viewport.add({
         //     xtype: 'list',
         //     data: [{
