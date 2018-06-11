@@ -99,7 +99,7 @@ public class TempControl implements Runnable {
                                 sendData[4] = (byte) ((int) round(rsDisplay.getFloat("temp")) - rs.getInt("tempset"));
 //                                System.out.println("send4 = " + sendTemp[4]);
 //                                System.out.println("sensor " + rs.getString("sensor"));
-                                sendData[5] = (byte) ((int) round(rsDisplay.getFloat("humid")) - rs.getInt("humidset"));
+                                sendData[5] = (byte) ((int) round(rs.getInt("humidset") - rsDisplay.getFloat("humid")));
                             }
                             if (sensorCount == 0) {
                                 sendData[4] = sendData[5] = -1;

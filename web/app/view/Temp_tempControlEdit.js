@@ -56,8 +56,8 @@ Ext.define('myApp.view.Temp_tempControlEdit', {
             disabled: true,
             name: 'humidset',
             label: 'Humid set',
-            minValue: 60,
-            maxValue: 70,
+            minValue: 70,
+            maxValue: 90,
             stepValue: 1,
             listeners: {
                 spin: 'spinHumid'
