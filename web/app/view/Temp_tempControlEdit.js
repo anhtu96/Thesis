@@ -17,7 +17,7 @@ Ext.define('myApp.view.Temp_tempControlEdit', {
     }],
     items: [{
         xtype: 'formpanel',
-        scrollable: false,
+        scrollable: true,
         height: 400,
         width: 300,
         store: 'TempDisplay',
