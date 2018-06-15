@@ -20,23 +20,31 @@ Ext.define('myApp.controller.MusicController', {
         store.sync();
         console.log(store);
     },
-    onCHList: function() {
-        Ext.getCmp('mainPanel').getTabBar().hide();
-        if (Ext.getCmp('musicModeBtn').getValue() == 0) {
-            Ext.getCmp('musicView').push(Ext.create('myApp.view.Music_manual'));
-            Ext.getCmp('musicView').getNavigationBar().setTitle('<p style = color:white>Manual Mode - ' + Ext.getCmp('CHList').getLastSelected().get('name') + '</p>');
+    onCHList: function(list) {
+        var user = Ext.getStore('LocalSession').getAt(0).get('username');
+        if (user == 'admin') {
+            Ext.getCmp('mainPanel').getTabBar().hide();
+            if (Ext.getCmp('musicModeBtn').getValue() == 0) {
+                Ext.getCmp('musicView').push(Ext.create('myApp.view.Music_manual'));
+                Ext.getCmp('musicView').getNavigationBar().setTitle('<p style = color:white>Manual Mode - ' + Ext.getCmp('CHList').getLastSelected().get('name') + '</p>');
+            } else {
+                var musicAddBtn = Ext.create('myApp.view.Music_addBtn', {
+                    id: 'musicAddBtn',
+                    iconCls: 'x-fa fa-plus',
+                    align: 'right'
+                });
+                Ext.getCmp('musicView').push(Ext.create('myApp.view.Music_auto'));
+                Ext.getCmp('musicView').getNavigationBar().add([musicAddBtn]);
+                Ext.getCmp('musicView').getNavigationBar().setTitle('<p style = color:white>Automatic Mode - ' + Ext.getCmp('CHList').getLastSelected().get('name') + '</p>');
+                this.fireEvent('loadView');
+            }
         } else {
-            var musicAddBtn = Ext.create('myApp.view.Music_addBtn', {
-                id: 'musicAddBtn',
-                iconCls: 'x-fa fa-plus',
-                align: 'right'
+            var task = new Ext.util.DelayedTask(function() {
+                list.deselectAll();
             });
-            Ext.getCmp('musicView').push(Ext.create('myApp.view.Music_auto'));
-            Ext.getCmp('musicView').getNavigationBar().add([musicAddBtn]);
-            Ext.getCmp('musicView').getNavigationBar().setTitle('<p style = color:white>Automatic Mode - ' + Ext.getCmp('CHList').getLastSelected().get('name') + '</p>');
-            this.fireEvent('loadView');
+            task.delay(100);
+            Ext.Msg.alert('Restricted action', 'This action can be performed by admin only.');
         }
-
     },
 
     musicPop: function() {

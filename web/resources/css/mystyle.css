@@ -13,6 +13,9 @@
 .diagram {
     background-image: url("../svg/diagram.svg");
 }
+.logout {
+    background-image: url("../svg/sign-out-alt.svg");
+}
 .music-icon {
     background-image: url("../svg/music.svg");
 }

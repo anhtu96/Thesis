@@ -46,6 +46,31 @@ Ext.define('myApp.controller.HomeController', {
                     //     surface.renderFrame();
                     // }
                 }
+            }, {
+                text: 'Log out',
+                iconCls: 'logout',
+                handler: function() {
+                    Ext.Msg.confirm('Log out', 'Are you sure you want log out?', function(value) {
+                        if (value == 'yes') {
+                            var storeLocalSession = Ext.getStore('LocalSession'),
+                                storeServerSession = Ext.getStore('ServerSession');
+                            storeServerSession.each(function(rec) {
+                                if (rec.get('id') == storeLocalSession.getAt(0).get('loginid')) {
+                                    storeServerSession.remove(rec);
+                                    storeServerSession.sync();
+                                    return;
+                                }
+                            });
+                            storeLocalSession.removeAll();
+                            storeLocalSession.sync();
+                            var task = new Ext.util.DelayedTask(function() {
+                                window.location.reload();
+                            });
+                            task.delay(500);
+                        }
+                    });
+
+                }
             }]
         });
         Ext.Viewport.setMenu(menu, {
@@ -469,69 +494,130 @@ Ext.define('myApp.controller.HomeController', {
      * add device
      */
     tempSensorAdd: function(button) {
-        var msgbox = Ext.create('myApp.view.Home_tempSensorAddDialog');
-        Ext.getCmp('homeView').add(msgbox);
-        msgbox.show();
+        var user = Ext.getStore('LocalSession').getAt(0).get('username');
+        if (user == 'admin') {
+            var msgbox = Ext.create('myApp.view.Home_tempSensorAddDialog');
+            Ext.getCmp('homeView').add(msgbox);
+            msgbox.show();
+        } else {
+            Ext.Msg.alert('Restricted action', 'This action can be performed by admin only.');
+        }
     },
     tempControlAdd: function(button) {
-        var msgbox = Ext.create('myApp.view.Home_tempControlAddDialog');
-        Ext.getCmp('homeView').add(msgbox);
-        msgbox.show();
+        var user = Ext.getStore('LocalSession').getAt(0).get('username');
+        if (user == 'admin') {
+            var msgbox = Ext.create('myApp.view.Home_tempControlAddDialog');
+            Ext.getCmp('homeView').add(msgbox);
+            msgbox.show();
+        } else {
+            Ext.Msg.alert('Restricted action', 'This action can be performed by admin only.');
+        }
     },
     lightbulbAdd: function(button) {
-        var msgbox = Ext.create('myApp.view.Home_lightbulbAddDialog');
-        Ext.getCmp('homeView').add(msgbox);
-        msgbox.show();
+        var user = Ext.getStore('LocalSession').getAt(0).get('username');
+        if (user == 'admin') {
+            var msgbox = Ext.create('myApp.view.Home_lightbulbAddDialog');
+            Ext.getCmp('homeView').add(msgbox);
+            msgbox.show();
+        } else {
+            Ext.Msg.alert('Restricted action', 'This action can be performed by admin only.');
+        }
     },
     flameAdd: function(button) {
-        var msgbox = Ext.create('myApp.view.Home_flameAddDialog');
-        Ext.getCmp('homeView').add(msgbox);
-        msgbox.show();
+        var user = Ext.getStore('LocalSession').getAt(0).get('username');
+        if (user == 'admin') {
+            var msgbox = Ext.create('myApp.view.Home_flameAddDialog');
+            Ext.getCmp('homeView').add(msgbox);
+            msgbox.show();
+        } else {
+            Ext.Msg.alert('Restricted action', 'This action can be performed by admin only.');
+        }
     },
     mailAdd: function(button) {
-        var msgbox = Ext.create('myApp.view.Home_editMail'),
-            store = Ext.getStore('Email');
-        Ext.getCmp('homeView').add(msgbox);
-        if (store.getCount() == 0) {
-            msgbox.setTitle('Add account');
+        var user = Ext.getStore('LocalSession').getAt(0).get('username');
+        if (user == 'admin') {
+            var msgbox = Ext.create('myApp.view.Home_editMail'),
+                store = Ext.getStore('Email');
+            Ext.getCmp('homeView').add(msgbox);
+            if (store.getCount() == 0) {
+                msgbox.setTitle('Add account');
+            } else {
+                msgbox.setTitle('Edit account');
+                msgbox.down('formpanel').setRecord(store.getAt(0));
+            }
+            msgbox.show();
         } else {
-            msgbox.setTitle('Edit account');
-            msgbox.down('formpanel').setRecord(store.getAt(0));
+            Ext.Msg.alert('Restricted action', 'This action can be performed by admin only.');
         }
-        msgbox.show();
     },
 
     /*
      * tap device list
      */
     tempSensorListTap: function(list, index, target, record, e, eOpts) {
-        var msgbox = Ext.create('myApp.view.Home_tempSensorAddDialog');
-        Ext.getCmp('homeView').add(msgbox);
-        msgbox.setTitle('Edit device');
-        msgbox.show();
-        msgbox.down('formpanel').setRecord(record);
+        var user = Ext.getStore('LocalSession').getAt(0).get('username');
+        if (user == 'admin') {
+            var msgbox = Ext.create('myApp.view.Home_tempSensorAddDialog');
+            Ext.getCmp('homeView').add(msgbox);
+            msgbox.setTitle('Edit device');
+            msgbox.show();
+            msgbox.down('formpanel').setRecord(record);
+        } else {
+            var task = new Ext.util.DelayedTask(function() {
+                list.deselectAll();
+            });
+            task.delay(100);
+            Ext.Msg.alert('Restricted action', 'This action can be performed by admin only.');
+        }
     },
     tempControlListTap: function(list, index, target, record, e, eOpts) {
-        var msgbox = Ext.create('myApp.view.Home_tempControlAddDialog');
-        Ext.getCmp('homeView').add(msgbox);
-        msgbox.setTitle('Edit device');
-        msgbox.show();
-        msgbox.down('formpanel').setRecord(record);
+        var user = Ext.getStore('LocalSession').getAt(0).get('username');
+        if (user == 'admin') {
+            var msgbox = Ext.create('myApp.view.Home_tempControlAddDialog');
+            Ext.getCmp('homeView').add(msgbox);
+            msgbox.setTitle('Edit device');
+            msgbox.show();
+            msgbox.down('formpanel').setRecord(record);
+        } else {
+            var task = new Ext.util.DelayedTask(function() {
+                list.deselectAll();
+            });
+            task.delay(100);
+            Ext.Msg.alert('Restricted action', 'This action can be performed by admin only.');
+        }
     },
     lightbulbHomeListTap: function(list, index, target, record, e, eOpts) {
-        var msgbox = Ext.create('myApp.view.Home_lightbulbAddDialog');
-        Ext.getCmp('homeView').add(msgbox);
-        msgbox.setTitle('Edit lightbulb');
-        msgbox.show();
-        msgbox.down('formpanel').setRecord(record);
-        Ext.getStore('LightbulbAuto').filter('deviceid', record.get('deviceid'));
+        var user = Ext.getStore('LocalSession').getAt(0).get('username');
+        if (user == 'admin') {
+            var msgbox = Ext.create('myApp.view.Home_lightbulbAddDialog');
+            Ext.getCmp('homeView').add(msgbox);
+            msgbox.setTitle('Edit lightbulb');
+            msgbox.show();
+            msgbox.down('formpanel').setRecord(record);
+            Ext.getStore('LightbulbAuto').filter('deviceid', record.get('deviceid'));
+        } else {
+            var task = new Ext.util.DelayedTask(function() {
+                list.deselectAll();
+            });
+            task.delay(100);
+            Ext.Msg.alert('Restricted action', 'This action can be performed by admin only.');
+        }
     },
     flameHomeTap: function(list, index, target, record, e, eOpts) {
-        var msgbox = Ext.create('myApp.view.Home_flameAddDialog');
-        Ext.getCmp('homeView').add(msgbox);
-        msgbox.setTitle('Edit flame sensor');
-        msgbox.show();
-        msgbox.down('formpanel').setRecord(record);
+        var user = Ext.getStore('LocalSession').getAt(0).get('username');
+        if (user == 'admin') {
+            var msgbox = Ext.create('myApp.view.Home_flameAddDialog');
+            Ext.getCmp('homeView').add(msgbox);
+            msgbox.setTitle('Edit flame sensor');
+            msgbox.show();
+            msgbox.down('formpanel').setRecord(record);
+        } else {
+            var task = new Ext.util.DelayedTask(function() {
+                list.deselectAll();
+            });
+            task.delay(100);
+            Ext.Msg.alert('Restricted action', 'This action can be performed by admin only.');
+        }
     },
 
     /*

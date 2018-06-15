@@ -2,22 +2,21 @@ Ext.define('myApp.controller.TempController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.temperature',
     requires: ['myApp.global.Vars'],
-    init: function() {
-        // setInterval(function() {
-        //     Ext.getStore('TempDisplay').load();
-        //     Ext.getStore('TempDisplay').removeAll();
-        //     Ext.getStore('TempSensorHome').load();
-        //     Ext.getStore('TempSensorHome').removeAll();
-        //     Ext.getStore('TempSensor').load();
-        //     Ext.getStore('TempSensor').removeAll();
-        // }, 10000);
-    },
     controlTap: function(grid, index, target, record) {
-        var msgbox = Ext.create('myApp.view.Temp_tempControlEdit');
-        Ext.getCmp('tempView').add(msgbox);
-        msgbox.down('formpanel').setRecord(record);
-        msgbox.setTitle('Edit device <i>"' + record.get('devicename') + '"</i>');
-        msgbox.show();
+        var user = Ext.getStore('LocalSession').getAt(0).get('username');
+        if (user == 'admin') {
+            var msgbox = Ext.create('myApp.view.Temp_tempControlEdit');
+            Ext.getCmp('tempView').add(msgbox);
+            msgbox.down('formpanel').setRecord(record);
+            msgbox.setTitle('Edit device <i>"' + record.get('devicename') + '"</i>');
+            msgbox.show();
+        } else {
+            var task = new Ext.util.DelayedTask(function() {
+                grid.deselectAll();
+            });
+            task.delay(100);
+            Ext.Msg.alert('Restricted action', 'This action can be performed by admin only.');
+        }
     },
     onToggleAuto: function(togglefield) {
         var form = togglefield.up('formpanel');
