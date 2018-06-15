@@ -22,11 +22,16 @@ Ext.define('myApp.controller.StatController', {
         selectfield.up('toolbar').up('sheet').down('cartesian').setStore(store);
     },
     onReset: function(button) {
-        var store = Ext.getStore('TempSensor'),
-            selectfield = button.up('toolbar').down('selectfield');
-        store.filter('deviceid', selectfield.getValue());
-        store.removeAll();
-        store.sync();
+        var user = Ext.getStore('LocalSession').getAt(0).get('username');
+        if (user == 'admin') {
+            var store = Ext.getStore('TempSensor'),
+                selectfield = button.up('toolbar').down('selectfield');
+            store.filter('deviceid', selectfield.getValue());
+            store.removeAll();
+            store.sync();
+        } else {
+            Ext.Msg.alert('Restricted action', 'This action can be performed by admin only.');
+        }
     },
     onSelectGrid: function(selectfield, newval) {
         var store = Ext.getStore('TempSensor');
@@ -34,11 +39,16 @@ Ext.define('myApp.controller.StatController', {
         selectfield.up('toolbar').up('sheet').down('grid').setStore(store);
     },
     onResetGrid: function(button) {
-        var store = Ext.getStore('TempSensor'),
-            selectfield = button.up('toolbar').down('selectfield');
-        store.filter('deviceid', selectfield.getValue());
-        store.removeAll();
-        store.sync();
+        var user = Ext.getStore('LocalSession').getAt(0).get('username');
+        if (user == 'admin') {
+            var store = Ext.getStore('TempSensor'),
+                selectfield = button.up('toolbar').down('selectfield');
+            store.filter('deviceid', selectfield.getValue());
+            store.removeAll();
+            store.sync();
+        } else {
+            Ext.Msg.alert('Restricted action', 'This action can be performed by admin only.');
+        }
     },
     onSelectFlame: function(selectfield, newval) {
         var store = Ext.getStore('Flame');
@@ -46,11 +56,16 @@ Ext.define('myApp.controller.StatController', {
         selectfield.up('toolbar').up('sheet').down('grid').setStore(store);
     },
     onResetFlame: function(button) {
-        var store = Ext.getStore('Flame'),
-            selectfield = button.up('toolbar').down('selectfield');
-        store.filter('deviceid', selectfield.getValue());
-        store.removeAll();
-        store.sync();
+        var user = Ext.getStore('LocalSession').getAt(0).get('username');
+        if (user == 'admin') {
+            var store = Ext.getStore('Flame'),
+                selectfield = button.up('toolbar').down('selectfield');
+            store.filter('deviceid', selectfield.getValue());
+            store.removeAll();
+            store.sync();
+        } else {
+            Ext.Msg.alert('Restricted action', 'This action can be performed by admin only.');
+        }
     },
     quantityTap: function(list) {
         list.setDisableSelection(true);

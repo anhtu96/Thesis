@@ -43,33 +43,37 @@ Ext.define('myApp.view.Home', {
             listeners: {
                 itemtap: 'tempSensorListTap',
                 itemswipe: function(list, index, target, record, e, eOpts) {
-                    if (e.direction == "left") {
-                        Ext.Msg.confirm('Delete item', 'Are you sure you want to delete this item?', function(value) {
-                            if (value == 'yes') {
-                                var devicerecord = record;
-                                var store = Ext.getStore('TempSensorHome');
-                                store.remove(record);
-                                store.sync();
-                                var storesensor = Ext.getStore('TempSensor'),
-                                    storedisplay = Ext.getStore('TempDisplay');
-                                storesensor.filter('deviceid', devicerecord.get('deviceid'));
-                                storesensor.removeAll();
-                                storedisplay.filter('deviceid', devicerecord.get('deviceid'));
-                                storedisplay.removeAll();
-                                storesensor.sync();
-                                storedisplay.sync();
-                                storesensor.clearFilter();
-                                storedisplay.clearFilter();
-                                // storesensor.each(function(record, id) {
-                                //     if (record.get('deviceid') == devicerecord.get('deviceid')) {
-                                //         storesensor.remove(record);
-                                //         storesensor.sync();
-                                //     }
-                                // });
-                            }
-                        })
+                    var user = Ext.getStore('LocalSession').getAt(0).get('username');
+                    if (user == 'admin') {
+                        if (e.direction == "left") {
+                            Ext.Msg.confirm('Delete item', 'Are you sure you want to delete this item?', function(value) {
+                                if (value == 'yes') {
+                                    var devicerecord = record;
+                                    var store = Ext.getStore('TempSensorHome');
+                                    store.remove(record);
+                                    store.sync();
+                                    var storesensor = Ext.getStore('TempSensor'),
+                                        storedisplay = Ext.getStore('TempDisplay');
+                                    storesensor.filter('deviceid', devicerecord.get('deviceid'));
+                                    storesensor.removeAll();
+                                    storedisplay.filter('deviceid', devicerecord.get('deviceid'));
+                                    storedisplay.removeAll();
+                                    storesensor.sync();
+                                    storedisplay.sync();
+                                    storesensor.clearFilter();
+                                    storedisplay.clearFilter();
+                                    // storesensor.each(function(record, id) {
+                                    //     if (record.get('deviceid') == devicerecord.get('deviceid')) {
+                                    //         storesensor.remove(record);
+                                    //         storesensor.sync();
+                                    //     }
+                                    // });
+                                }
+                            })
+                        }
+                    } else {
+                        Ext.Msg.alert('Restricted action', 'This action can be performed by admin only.');
                     }
-
                 }
             },
         }, {
@@ -93,24 +97,28 @@ Ext.define('myApp.view.Home', {
             listeners: {
                 itemtap: 'tempControlListTap',
                 itemswipe: function(list, index, target, record, e, eOpts) {
-                    if (e.direction == "left") {
-                        Ext.Msg.confirm('Delete item', 'Are you sure you want to delete this item?', function(value) {
-                            if (value == 'yes') {
-                                var devicerecord = record;
-                                var store = Ext.getStore('TempControlHome');
-                                store.remove(record);
-                                store.sync();
-                                var storecontrol = Ext.getStore('TempControl');
-                                storecontrol.each(function(record, id) {
-                                    if (record.get('deviceid') == devicerecord.get('deviceid')) {
-                                        storecontrol.remove(record);
-                                        storecontrol.sync();
-                                    }
-                                });
-                            }
-                        })
+                    var user = Ext.getStore('LocalSession').getAt(0).get('username');
+                    if (user == 'admin') {
+                        if (e.direction == "left") {
+                            Ext.Msg.confirm('Delete item', 'Are you sure you want to delete this item?', function(value) {
+                                if (value == 'yes') {
+                                    var devicerecord = record;
+                                    var store = Ext.getStore('TempControlHome');
+                                    store.remove(record);
+                                    store.sync();
+                                    var storecontrol = Ext.getStore('TempControl');
+                                    storecontrol.each(function(record, id) {
+                                        if (record.get('deviceid') == devicerecord.get('deviceid')) {
+                                            storecontrol.remove(record);
+                                            storecontrol.sync();
+                                        }
+                                    });
+                                }
+                            })
+                        }
+                    } else {
+                        Ext.Msg.alert('Restricted action', 'This action can be performed by admin only.');
                     }
-
                 }
             },
         }, {
@@ -137,31 +145,35 @@ Ext.define('myApp.view.Home', {
             listeners: {
                 itemtap: 'lightbulbHomeListTap',
                 itemswipe: function(list, index, target, record, e, eOpts) {
-                    if (e.direction == "left") {
-                        Ext.Msg.confirm('Delete item', 'Are you sure you want to delete this item?', function(value) {
-                            if (value == 'yes') {
-                                var devicerecord = record;
-                                var store = Ext.getStore('LightbulbHome'),
-                                    storeAuto = Ext.getStore('LightbulbAuto');
-                                storeAuto.filter('deviceid', record.get('deviceid'));
-                                if (storeAuto.getCount() > 0) {
-                                    storeAuto.removeAll();
-                                    storeAuto.sync();
-                                };
-                                storeAuto.clearFilter();
-                                store.remove(record);
-                                store.sync();
-                                // var storecontrol = Ext.getStore('TempControl');
-                                // storecontrol.each(function(record, id) {
-                                //     if (record.get('deviceid') == devicerecord.get('deviceid')) {
-                                //         storecontrol.remove(record);
-                                //         storecontrol.sync();
-                                //     }
-                                // });
-                            }
-                        })
+                    var user = Ext.getStore('LocalSession').getAt(0).get('username');
+                    if (user == 'admin') {
+                        if (e.direction == "left") {
+                            Ext.Msg.confirm('Delete item', 'Are you sure you want to delete this item?', function(value) {
+                                if (value == 'yes') {
+                                    var devicerecord = record;
+                                    var store = Ext.getStore('LightbulbHome'),
+                                        storeAuto = Ext.getStore('LightbulbAuto');
+                                    storeAuto.filter('deviceid', record.get('deviceid'));
+                                    if (storeAuto.getCount() > 0) {
+                                        storeAuto.removeAll();
+                                        storeAuto.sync();
+                                    };
+                                    storeAuto.clearFilter();
+                                    store.remove(record);
+                                    store.sync();
+                                    // var storecontrol = Ext.getStore('TempControl');
+                                    // storecontrol.each(function(record, id) {
+                                    //     if (record.get('deviceid') == devicerecord.get('deviceid')) {
+                                    //         storecontrol.remove(record);
+                                    //         storecontrol.sync();
+                                    //     }
+                                    // });
+                                }
+                            })
+                        }
+                    } else {
+                        Ext.Msg.alert('Restricted action', 'This action can be performed by admin only.');
                     }
-
                 }
 
             }
@@ -189,17 +201,21 @@ Ext.define('myApp.view.Home', {
             listeners: {
                 itemtap: 'flameHomeTap',
                 itemswipe: function(list, index, target, record, e, eOpts) {
-                    if (e.direction == "left") {
-                        Ext.Msg.confirm('Delete item', 'Are you sure you want to delete this item?', function(value) {
-                            if (value == 'yes') {
-                                var devicerecord = record;
-                                var store = Ext.getStore('FlameHome');
-                                store.remove(record);
-                                store.sync();
-                            }
-                        })
+                    var user = Ext.getStore('LocalSession').getAt(0).get('username');
+                    if (user == 'admin') {
+                        if (e.direction == "left") {
+                            Ext.Msg.confirm('Delete item', 'Are you sure you want to delete this item?', function(value) {
+                                if (value == 'yes') {
+                                    var devicerecord = record;
+                                    var store = Ext.getStore('FlameHome');
+                                    store.remove(record);
+                                    store.sync();
+                                }
+                            })
+                        }
+                    } else {
+                        Ext.Msg.alert('Restricted action', 'This action can be performed by admin only.');
                     }
-
                 }
 
             }
@@ -219,12 +235,17 @@ Ext.define('myApp.view.Home', {
                 iconCls: 'x-fa fa-retweet',
                 ui: 'decline',
                 handler: function(button) {
-                    Ext.getStore('Email').removeAll();
-                    Ext.getStore('Email').sync();
-                    Ext.Msg.show({
-                        title: 'Reset accounts',
-                        message: 'All accounts have been removed!'
-                    });
+                    var user = Ext.getStore('LocalSession').getAt(0).get('username');
+                    if (user == 'admin') {
+                        Ext.getStore('Email').removeAll();
+                        Ext.getStore('Email').sync();
+                        Ext.Msg.show({
+                            title: 'Reset accounts',
+                            message: 'All accounts have been removed!'
+                        });
+                    } else {
+                        Ext.Msg.alert('Restricted action', 'This action can be performed by admin only.');
+                    }
                 }
             }]
         }]

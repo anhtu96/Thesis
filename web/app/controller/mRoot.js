@@ -10,57 +10,38 @@ Ext.define('myApp.controller.mRoot', {
              xtype: 'login'
            })
          }*/
-        var initNum = 0;
-        var editRecord = 2;
-        // var audio = Ext.create('Ext.Audio', {
-        //     url: 'audio/alarm/fire.mp3',
-        //     id: 'fireaudio',
-        //     loop: true
-        // });
-        Ext.Viewport.add({
-            // xtype: 'tabpanel',
-            // animation: {
-            //   type: 'slide',
-            //   direction: 'right',
-            //   duration: 500
-            // },
-            // items: [{
-            //   title: 'Home',
-            //   items: [{
-            //     xtype: 'button',
-            //     text: 'HEllo',
-            //   }]
-            // }, {
-            //   title: 'Dashboard',
-            //   items: [{
-            //     xtype: 'button',
-            //     text: 'WORld',
-            //   }]
-            // }]
-            xtype: 'mainView',
+        var storeSession = Ext.getStore('ServerSession'),
+            storeLocalSession = Ext.getStore('LocalSession'),
+            check = 0;
+        var task = new Ext.util.DelayedTask(function() {
+            if (storeLocalSession.getCount() > 0) {
+                storeSession.each(function(record) {
+                    if (record.get('id') == storeLocalSession.getAt(0).get('loginid')) {
+                        check = 1;
+                        return;
+                    }
+                });
+            }
+
+            if (check == 0) {
+                storeLocalSession.removeAll();
+                storeLocalSession.sync();
+                Ext.Viewport.add({
+                    xtype: 'login'
+                })
+            } else {
+                Ext.Viewport.add({
+                    xtype: 'mainView',
+                });
+                var user = Ext.getStore('LocalSession').getAt(0).get('username');
+                if (user == 'user') {
+                    Ext.getCmp('musicModeBtn').setDisabled(true);
+                }
+            }
+            var initNum = 0;
+            var editRecord = 2;
         });
-        // Ext.Viewport.add({
-        //     xtype: 'list',
-        //     data: [{
-        //         a: '1',
-        //         b: 0
-        //     }, {
-        //         a: '2',
-        //         b: 1
-        //     }],
-        //     useComponent: true,
-        //     defaultType: 'mydataitem'
-        // });
-        // var runner = new Ext.util.TaskRunner(),
-        //     task;
+        task.delay(1000);
 
-        // task = runner.newTask({
-        //     run: function() {
-        //         Ext.getStore('TempSensor').load();
-        //     },
-        //     interval: 10000
-        // });
-        // task.start();
     }
-
 })

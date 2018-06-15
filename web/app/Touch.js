@@ -22,7 +22,10 @@ Ext.define('myApp.Touch', {
         'Floor',
         'FlameHome',
         'Flame',
-        'Email'
+        'Email',
+        'Login',
+        'LocalSession',
+        'ServerSession'
     ],
     stores: [
         'UserStore',
@@ -45,7 +48,10 @@ Ext.define('myApp.Touch', {
         'Floor',
         'FlameHome',
         'Flame',
-        'Email'
+        'Email',
+        'Login',
+        'LocalSession',
+        'ServerSession'
     ],
     controllers: ['mRoot'],
     views: ['Main',

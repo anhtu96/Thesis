@@ -65,11 +65,13 @@ import org.energy.api.resource.FlameResource;
 import org.energy.api.resource.FloorResource;
 import org.energy.api.resource.LightbulbAutoResource;
 import org.energy.api.resource.LightbulbHomeResource;
+import org.energy.api.resource.LoginResource;
 import org.energy.api.resource.MusicAuto1Resource;
 import org.energy.api.resource.MusicAuto2Resource;
 import org.energy.api.resource.MusicManual1Resource;
 import org.energy.api.resource.MusicManual2Resource;
 import org.energy.api.resource.MusicModeResource;
+import org.energy.api.resource.ServersessionResource;
 import org.energy.api.resource.TempControlHomeResource;
 import org.energy.api.resource.TempSensorHomeResource;
 import org.energy.api.resource.TempDisplayResource;
@@ -196,7 +198,9 @@ public class WebServer {
                 FloorResource.class,
                 FlameHomeResource.class,
                 FlameResource.class,
-                EmailResource.class);
+                EmailResource.class,
+                LoginResource.class,
+                ServersessionResource.class);
         servletHandler.addServlet(new ServletHolder(new ServletContainer(resourceConfig)), "/*");
 
         handlers.addHandler(servletHandler);
