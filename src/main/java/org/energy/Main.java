@@ -94,6 +94,7 @@ public final class Main {
         //reset manual playback mode
         st.execute("truncate table musicmanual1");
         st.execute("truncate table musicmanual2");
+        st.execute("truncate table serversession");
         st.close();
 //        serial.addListener(new SerialDataEventListener() {
 //            @Override
