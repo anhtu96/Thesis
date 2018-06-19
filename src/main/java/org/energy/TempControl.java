@@ -96,10 +96,25 @@ public class TempControl implements Runnable {
                             rsDisplay = stDisplay.executeQuery("select * from tempdisplay where devicename like '" + rs.getString("sensor") + "'");
                             while (rsDisplay.next()) {
                                 sensorCount++;
-                                sendData[4] = (byte) ((int) round(rsDisplay.getFloat("temp")) - rs.getInt("tempset"));
+//                                sendData[4] = (byte) ((int) round(rsDisplay.getFloat("temp")) - rs.getInt("tempset"));
 //                                System.out.println("send4 = " + sendTemp[4]);
 //                                System.out.println("sensor " + rs.getString("sensor"));
-                                sendData[5] = (byte) ((int) round(rs.getInt("humidset") - rsDisplay.getFloat("humid")));
+//                                sendData[5] = (byte) ((int) round(rs.getInt("humidset") - rsDisplay.getFloat("humid")));
+                                int humidVariance = (int) round(rs.getInt("humidset") - rsDisplay.getFloat("humid"));
+                                int tempVariance = (int) round(rsDisplay.getFloat("temp")) - rs.getInt("tempset");
+                                if (humidVariance > 0 && tempVariance > 0) {
+                                    sendData[4] = -1;
+                                    sendData[5] = 1;
+                                } else if (tempVariance <= 0 && tempVariance > -2 && humidVariance > 5) {
+                                    sendData[4] = -1;
+                                    sendData[5] = 1;
+                                } else if (tempVariance > 2 && humidVariance <= 0) {
+                                    sendData[4] = (byte) humidVariance;
+                                    sendData[5] = 1;
+                                } else if (tempVariance <= 0 && humidVariance <= 0) {
+                                    sendData[4] = (byte) humidVariance;
+                                    sendData[5] = -1;
+                                }
                             }
                             if (sensorCount == 0) {
                                 sendData[4] = sendData[5] = -1;
