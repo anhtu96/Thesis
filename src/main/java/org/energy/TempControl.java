@@ -106,7 +106,7 @@ public class TempControl implements Runnable {
                                     sendData[4] = -1;
                                     sendData[5] = 1;
                                 }
-                                if (tempVariance <= 0 && tempVariance > -2 && humidVariance > 5) {
+                                if (tempVariance <= 0 && tempVariance >= -3 && humidVariance > 5) {
                                     sendData[4] = -1;
                                     sendData[5] = 1;
                                 }

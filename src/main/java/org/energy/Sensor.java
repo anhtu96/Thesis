@@ -103,7 +103,7 @@ public class Sensor implements Runnable {
                                 SyncTempSensorHome.update((int) data[2], "online", "green");
                                 if (cntTimeTemp == 3) {
                                     Date date = new Date();
-                                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                                     String sendtime = sdf.format(date);
                                     SyncTempSensor.insert((int) data[2], devicename, sendtime, sensor[0], sensor[1]);
                                 }
@@ -123,7 +123,7 @@ public class Sensor implements Runnable {
                                         SendMail.send(rsMail.getString("sender"), rsMail.getString("password"), rsMail.getString("recipient"), devicename);
                                     }
                                     Date date = new Date();
-                                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                                     String sendtime = sdf.format(date);
                                     SyncFlame.insert((int) data[2], devicename, sendtime);
                                 }
@@ -144,7 +144,7 @@ public class Sensor implements Runnable {
                 if (cntTimeTemp > 3) {
                     cntTimeTemp = 0;
                 }
-                if (cntTimeFlame > 3) {
+                if (cntTimeFlame > 1) {
                     cntTimeFlame = 0;
                 }
                 rs = st.executeQuery("select * from tempsensorhome");
@@ -174,7 +174,7 @@ public class Sensor implements Runnable {
                         System.out.println(duration);
                         if (cntTemp < 1) {
                             Date date = new Date();
-                            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                             String sendtime = sdf.format(date);
                             if (cntTimeTemp == 3) {
 //                                stSensor.executeUpdate("insert into tempsensor (deviceid,devicename,sendtime,temp,humid) values ('" + (int) sendTemp[2] + "','" + devicename + "','" + sendtime + "','" + 0 + "','" + 0 + "')");
@@ -221,7 +221,7 @@ public class Sensor implements Runnable {
                         }
                         if (cntFlame < 1) {
                             Date date = new Date();
-                            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                             String sendtime = sdf.format(date);
                             SyncFlameHome.update((int) sendFlame[2], "offline", "red", 1);
                         }
