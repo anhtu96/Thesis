@@ -69,7 +69,6 @@ Ext.define('myApp.controller.HomeController', {
                             task.delay(500);
                         }
                     });
-
                 }
             }]
         });

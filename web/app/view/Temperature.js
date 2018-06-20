@@ -6,6 +6,7 @@ Ext.define('myApp.view.Temperature', {
     id: 'tempView',
     height: '100%',
     layout: 'vbox',
+    scrollable: true,
     items: [{
             xtype: 'titlebar',
             title: 'Temperature',

@@ -3,7 +3,10 @@ Ext.define("myApp.store.ServerSession", {
     config: {
         model: 'myApp.model.ServerSession',
         autoLoad: true,
-
+        sorters: [{
+            property: 'id',
+            direction: 'ASC'
+        }],
         proxy: {
             type: 'rest',
             url: 'api/serversession',
