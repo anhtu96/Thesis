@@ -42,12 +42,12 @@ Ext.define('myApp.view.StatSheetGrid', {
         columns: [{
             text: 'Name',
             dataIndex: 'devicename',
-            flex: 1.5,
+            flex: 1.2,
         }, {
             text: 'Time',
             align: 'center',
             dataIndex: 'sendtime',
-            flex: 1.5
+            flex: 2
         }, {
             text: 'Temperature',
             align: 'center',
