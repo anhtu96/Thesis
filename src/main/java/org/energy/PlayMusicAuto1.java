@@ -78,7 +78,7 @@ public class PlayMusicAuto1 implements Runnable {
                         if (calendarCurrent.before(calendarList) && checkBefore == 0 && rs.getInt("state") == 1) {
                             if (calendarMax.before(calendarList) || cntMax == 0) {
                                 calendarMax.setTime(calendarList.getTime());
-//                                    System.out.println("aaa");
+                                System.out.println("max music");
                                 songTmp = rs.getString("name");
                             }
                             cntMax++;
@@ -116,7 +116,7 @@ public class PlayMusicAuto1 implements Runnable {
                         clip.loop(clip.LOOP_CONTINUOUSLY);
                     }
                 }
-                Thread.sleep(5000);
+                Thread.sleep(2000);
                 System.out.println(songTmp);
             } catch (SQLException ex) {
                 Logger.getLogger(PlayMusicAuto1.class.getName()).log(Level.SEVERE, null, ex);

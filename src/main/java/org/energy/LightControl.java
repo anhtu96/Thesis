@@ -101,13 +101,14 @@ public class LightControl implements Runnable {
                                     String currentTime = new SimpleDateFormat("hh:mm a").format(Calendar.getInstance().getTime());
 //                                System.out.println(time);
                                     currentCalendar.setTime(new SimpleDateFormat("hh:mm a").parse(currentTime));
-                                    if (listCalendar.after(currentCalendar) && checkBefore == 0) {
-                                        if ((maxCalendar.before(listCalendar) || cntMax == 0)) {
-                                            maxCalendar.setTime(listCalendar.getTime());
-                                            switchtype = rsAuto.getString("switchtype");
-                                        }
-                                        cntMax++;
-                                    }
+//                                    if (listCalendar.after(currentCalendar) && checkBefore == 0) {
+//                                        if ((maxCalendar.before(listCalendar) || cntMax == 0)) {
+//                                            maxCalendar.setTime(listCalendar.getTime());
+//                                            switchtype = rsAuto.getString("switchtype");
+//                                            System.out.println("max");
+//                                        }
+//                                        cntMax++;
+//                                    }
                                     if (listCalendar.before(currentCalendar) || listCalendar.equals(currentCalendar)) {
                                         checkBefore = 1;
                                         if (maxbeforeCalendar.before(listCalendar) || cntBefore == 0) {
@@ -127,6 +128,7 @@ public class LightControl implements Runnable {
                         } else {
                             state = rsHome.getInt("state");
                         }
+                        System.out.println("light state " + state);
                         sendData[5] = (byte) state;
                         crc_low = (byte) (checksum.getResult(sendData, sendData.length) & 0x00ff);
                         crc_high = (byte) ((checksum.getResult(sendData, sendData.length) & 0xff00) >> 8);
