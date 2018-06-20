@@ -105,13 +105,16 @@ public class TempControl implements Runnable {
                                 if (humidVariance > 0 && tempVariance > 0) {
                                     sendData[4] = -1;
                                     sendData[5] = 1;
-                                } else if (tempVariance <= 0 && tempVariance > -2 && humidVariance > 5) {
+                                }
+                                if (tempVariance <= 0 && tempVariance > -2 && humidVariance > 5) {
                                     sendData[4] = -1;
                                     sendData[5] = 1;
-                                } else if (tempVariance > 2 && humidVariance <= 0) {
+                                }
+                                if (tempVariance > 2 && humidVariance <= 0) {
                                     sendData[4] = (byte) humidVariance;
                                     sendData[5] = 1;
-                                } else if (tempVariance <= 0 && humidVariance <= 0) {
+                                }
+                                if (tempVariance <= 0 && humidVariance <= 0) {
                                     sendData[4] = (byte) humidVariance;
                                     sendData[5] = -1;
                                 }
@@ -119,6 +122,8 @@ public class TempControl implements Runnable {
                             if (sensorCount == 0) {
                                 sendData[4] = sendData[5] = -1;
                             }
+                            System.out.println("fan " + sendData[4]);
+                            System.out.println("humid " + sendData[5]);
                             rsDisplay.close();
                         }
                         crc_low = (byte) (checksum.getResult(sendData, sendData.length) & 0x00ff);
